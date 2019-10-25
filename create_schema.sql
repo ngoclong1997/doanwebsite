@@ -2,10 +2,10 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 9.6.15
--- Dumped by pg_dump version 9.6.15
+-- Dumped from database version 10.8
+-- Dumped by pg_dump version 10.8
 
--- Started on 2019-10-09 00:28:37 +07
+-- Started on 2019-10-25 11:02:54
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -19,7 +19,7 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
--- TOC entry 1 (class 3079 OID 12655)
+-- TOC entry 1 (class 3079 OID 12924)
 -- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
 --
 
@@ -27,7 +27,7 @@ CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
 
 
 --
--- TOC entry 2467 (class 0 OID 0)
+-- TOC entry 2890 (class 0 OID 0)
 -- Dependencies: 1
 -- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
 --
@@ -40,7 +40,7 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- TOC entry 186 (class 1259 OID 24595)
+-- TOC entry 196 (class 1259 OID 26463)
 -- Name: answer; Type: TABLE; Schema: public; Owner: admin_user
 --
 
@@ -49,8 +49,8 @@ CREATE TABLE public.answer (
     subject_id bigint NOT NULL,
     test_code character varying(10) NOT NULL,
     answers character varying(255) NOT NULL,
-	exam_code character varying(255),
-	exam_id bigint NOT NULL,
+    exam_code character varying(255),
+    exam_id bigint NOT NULL,
     added_by character varying(50),
     modified_by character varying(50),
     created_at timestamp without time zone,
@@ -61,7 +61,7 @@ CREATE TABLE public.answer (
 ALTER TABLE public.answer OWNER TO admin_user;
 
 --
--- TOC entry 189 (class 1259 OID 24608)
+-- TOC entry 197 (class 1259 OID 26469)
 -- Name: answer_id_seq; Type: SEQUENCE; Schema: public; Owner: admin_user
 --
 
@@ -76,7 +76,7 @@ CREATE SEQUENCE public.answer_id_seq
 ALTER TABLE public.answer_id_seq OWNER TO admin_user;
 
 --
--- TOC entry 199 (class 1259 OID 24661)
+-- TOC entry 198 (class 1259 OID 26471)
 -- Name: exam; Type: TABLE; Schema: public; Owner: admin_user
 --
 
@@ -95,7 +95,7 @@ CREATE TABLE public.exam (
 ALTER TABLE public.exam OWNER TO admin_user;
 
 --
--- TOC entry 198 (class 1259 OID 24659)
+-- TOC entry 199 (class 1259 OID 26477)
 -- Name: exam_id_seq; Type: SEQUENCE; Schema: public; Owner: admin_user
 --
 
@@ -110,8 +110,8 @@ CREATE SEQUENCE public.exam_id_seq
 ALTER TABLE public.exam_id_seq OWNER TO admin_user;
 
 --
--- TOC entry 2468 (class 0 OID 0)
--- Dependencies: 198
+-- TOC entry 2891 (class 0 OID 0)
+-- Dependencies: 199
 -- Name: exam_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: admin_user
 --
 
@@ -119,7 +119,7 @@ ALTER SEQUENCE public.exam_id_seq OWNED BY public.exam.id;
 
 
 --
--- TOC entry 191 (class 1259 OID 24612)
+-- TOC entry 200 (class 1259 OID 26479)
 -- Name: grade; Type: TABLE; Schema: public; Owner: admin_user
 --
 
@@ -128,7 +128,7 @@ CREATE TABLE public.grade (
     subject_id bigint NOT NULL,
     point numeric(2,2) NOT NULL,
     exam_id bigint NOT NULL,
-	created_at timestamp without time zone,
+    created_at timestamp without time zone,
     modified_at timestamp without time zone,
     added_by character varying(50),
     modified_by character varying(50)
@@ -138,7 +138,22 @@ CREATE TABLE public.grade (
 ALTER TABLE public.grade OWNER TO admin_user;
 
 --
--- TOC entry 195 (class 1259 OID 24627)
+-- TOC entry 210 (class 1259 OID 26552)
+-- Name: hibernate_sequence; Type: SEQUENCE; Schema: public; Owner: admin_user
+--
+
+CREATE SEQUENCE public.hibernate_sequence
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.hibernate_sequence OWNER TO admin_user;
+
+--
+-- TOC entry 201 (class 1259 OID 26482)
 -- Name: role; Type: TABLE; Schema: public; Owner: admin_user
 --
 
@@ -156,7 +171,7 @@ CREATE TABLE public.role (
 ALTER TABLE public.role OWNER TO admin_user;
 
 --
--- TOC entry 194 (class 1259 OID 24625)
+-- TOC entry 202 (class 1259 OID 26488)
 -- Name: role_id_seq; Type: SEQUENCE; Schema: public; Owner: admin_user
 --
 
@@ -171,8 +186,8 @@ CREATE SEQUENCE public.role_id_seq
 ALTER TABLE public.role_id_seq OWNER TO admin_user;
 
 --
--- TOC entry 2469 (class 0 OID 0)
--- Dependencies: 194
+-- TOC entry 2892 (class 0 OID 0)
+-- Dependencies: 202
 -- Name: role_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: admin_user
 --
 
@@ -180,30 +195,29 @@ ALTER SEQUENCE public.role_id_seq OWNED BY public.role.id;
 
 
 --
--- TOC entry 188 (class 1259 OID 24602)
+-- TOC entry 203 (class 1259 OID 26490)
 -- Name: student; Type: TABLE; Schema: public; Owner: admin_user
 --
 
 CREATE TABLE public.student (
     id bigint NOT NULL,
     code character varying(10) NOT NULL,
-	lastname character varying(50) NOT NULL,
+    lastname character varying(50) NOT NULL,
     firstname character varying(30) NOT NULL,
-	dob timestamp without time zone NOT NULL,
+    dob timestamp without time zone NOT NULL,
     gender character varying(5) NOT NULL,
     exam_id bigint NOT NULL,
-	added_by character varying(50),
+    added_by character varying(50),
     modified_by character varying(50),
     created_at timestamp without time zone,
     modified_at timestamp without time zone
-    
 );
 
 
 ALTER TABLE public.student OWNER TO admin_user;
 
 --
--- TOC entry 187 (class 1259 OID 24600)
+-- TOC entry 204 (class 1259 OID 26493)
 -- Name: student_id_seq; Type: SEQUENCE; Schema: public; Owner: admin_user
 --
 
@@ -218,8 +232,8 @@ CREATE SEQUENCE public.student_id_seq
 ALTER TABLE public.student_id_seq OWNER TO admin_user;
 
 --
--- TOC entry 2470 (class 0 OID 0)
--- Dependencies: 187
+-- TOC entry 2893 (class 0 OID 0)
+-- Dependencies: 204
 -- Name: student_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: admin_user
 --
 
@@ -227,7 +241,7 @@ ALTER SEQUENCE public.student_id_seq OWNED BY public.student.id;
 
 
 --
--- TOC entry 185 (class 1259 OID 24590)
+-- TOC entry 205 (class 1259 OID 26495)
 -- Name: subject; Type: TABLE; Schema: public; Owner: admin_user
 --
 
@@ -235,7 +249,7 @@ CREATE TABLE public.subject (
     id bigint NOT NULL,
     name character varying(50) NOT NULL,
     exam_id bigint DEFAULT 0 NOT NULL,
-	created_at timestamp without time zone,
+    created_at timestamp without time zone,
     modified_at timestamp without time zone,
     added_by character varying(50),
     modified_by character varying(50)
@@ -245,7 +259,7 @@ CREATE TABLE public.subject (
 ALTER TABLE public.subject OWNER TO admin_user;
 
 --
--- TOC entry 190 (class 1259 OID 24610)
+-- TOC entry 206 (class 1259 OID 26499)
 -- Name: subject_id_seq; Type: SEQUENCE; Schema: public; Owner: admin_user
 --
 
@@ -260,7 +274,7 @@ CREATE SEQUENCE public.subject_id_seq
 ALTER TABLE public.subject_id_seq OWNER TO admin_user;
 
 --
--- TOC entry 193 (class 1259 OID 24619)
+-- TOC entry 207 (class 1259 OID 26501)
 -- Name: user; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -268,10 +282,10 @@ CREATE TABLE public."user" (
     id bigint NOT NULL,
     username character varying(50) NOT NULL,
     password character varying(255) NOT NULL,
-	firstname character varying(50) NOT NULL,
-	lastname character varying(100) NOT NULL,
-	email character varying(255) NOT NULL,
-	enabled boolean NOT NULL,
+    firstname character varying(50) NOT NULL,
+    lastname character varying(100) NOT NULL,
+    email character varying(255) NOT NULL,
+    enabled boolean NOT NULL,
     added_by character varying(50),
     modified_by character varying(50),
     created_at timestamp without time zone,
@@ -282,7 +296,7 @@ CREATE TABLE public."user" (
 ALTER TABLE public."user" OWNER TO postgres;
 
 --
--- TOC entry 192 (class 1259 OID 24617)
+-- TOC entry 208 (class 1259 OID 26507)
 -- Name: user_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -297,8 +311,8 @@ CREATE SEQUENCE public.user_id_seq
 ALTER TABLE public.user_id_seq OWNER TO postgres;
 
 --
--- TOC entry 2471 (class 0 OID 0)
--- Dependencies: 192
+-- TOC entry 2894 (class 0 OID 0)
+-- Dependencies: 208
 -- Name: user_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
@@ -306,7 +320,7 @@ ALTER SEQUENCE public.user_id_seq OWNED BY public."user".id;
 
 
 --
--- TOC entry 197 (class 1259 OID 24638)
+-- TOC entry 209 (class 1259 OID 26509)
 -- Name: user_role; Type: TABLE; Schema: public; Owner: admin_user
 --
 
@@ -323,7 +337,7 @@ CREATE TABLE public.user_role (
 ALTER TABLE public.user_role OWNER TO admin_user;
 
 --
--- TOC entry 2316 (class 2604 OID 24664)
+-- TOC entry 2714 (class 2604 OID 26512)
 -- Name: exam id; Type: DEFAULT; Schema: public; Owner: admin_user
 --
 
@@ -331,7 +345,7 @@ ALTER TABLE ONLY public.exam ALTER COLUMN id SET DEFAULT nextval('public.exam_id
 
 
 --
--- TOC entry 2314 (class 2604 OID 24630)
+-- TOC entry 2715 (class 2604 OID 26513)
 -- Name: role id; Type: DEFAULT; Schema: public; Owner: admin_user
 --
 
@@ -339,7 +353,7 @@ ALTER TABLE ONLY public.role ALTER COLUMN id SET DEFAULT nextval('public.role_id
 
 
 --
--- TOC entry 2312 (class 2604 OID 24605)
+-- TOC entry 2716 (class 2604 OID 26514)
 -- Name: student id; Type: DEFAULT; Schema: public; Owner: admin_user
 --
 
@@ -347,14 +361,160 @@ ALTER TABLE ONLY public.student ALTER COLUMN id SET DEFAULT nextval('public.stud
 
 
 --
--- TOC entry 2313 (class 2604 OID 24622)
+-- TOC entry 2718 (class 2604 OID 26515)
 -- Name: user id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public."user" ALTER COLUMN id SET DEFAULT nextval('public.user_id_seq'::regclass);
 
+
 --
--- TOC entry 2320 (class 2606 OID 24599)
+-- TOC entry 2868 (class 0 OID 26463)
+-- Dependencies: 196
+-- Data for Name: answer; Type: TABLE DATA; Schema: public; Owner: admin_user
+--
+
+COPY public.answer (id, subject_id, test_code, answers, exam_code, exam_id, added_by, modified_by, created_at, modified_at) FROM stdin;
+\.
+
+
+--
+-- TOC entry 2870 (class 0 OID 26471)
+-- Dependencies: 198
+-- Data for Name: exam; Type: TABLE DATA; Schema: public; Owner: admin_user
+--
+
+COPY public.exam (id, name, start_date, description, added_by, modified_by, created_at, modified_at) FROM stdin;
+\.
+
+
+--
+-- TOC entry 2872 (class 0 OID 26479)
+-- Dependencies: 200
+-- Data for Name: grade; Type: TABLE DATA; Schema: public; Owner: admin_user
+--
+
+COPY public.grade (student_id, subject_id, point, exam_id, created_at, modified_at, added_by, modified_by) FROM stdin;
+\.
+
+
+--
+-- TOC entry 2873 (class 0 OID 26482)
+-- Dependencies: 201
+-- Data for Name: role; Type: TABLE DATA; Schema: public; Owner: admin_user
+--
+
+COPY public.role (id, name, description, created_at, modified_at, added_by, modified_by) FROM stdin;
+\.
+
+
+--
+-- TOC entry 2875 (class 0 OID 26490)
+-- Dependencies: 203
+-- Data for Name: student; Type: TABLE DATA; Schema: public; Owner: admin_user
+--
+
+COPY public.student (id, code, lastname, firstname, dob, gender, exam_id, added_by, modified_by, created_at, modified_at) FROM stdin;
+\.
+
+
+--
+-- TOC entry 2877 (class 0 OID 26495)
+-- Dependencies: 205
+-- Data for Name: subject; Type: TABLE DATA; Schema: public; Owner: admin_user
+--
+
+COPY public.subject (id, name, exam_id, created_at, modified_at, added_by, modified_by) FROM stdin;
+\.
+
+
+--
+-- TOC entry 2879 (class 0 OID 26501)
+-- Dependencies: 207
+-- Data for Name: user; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."user" (id, username, password, firstname, lastname, email, enabled, added_by, modified_by, created_at, modified_at) FROM stdin;
+1	bobnguyen	$2a$10$Bc2Wt28E9K0i4uXVw2M4XeJv/ZhEX5Cf8s3YzinaQg4Ask7BbLSIC	Long	Nguyen Ngoc	nguyenngoclong.dt.hy@gmail.com	t	\N	\N	\N	\N
+2	bob	$2a$10$JSoPNo02JKQ8RDSyzESWr.s7g7dAKEE/Q2d.DsN/EFoShZ1rabE72	Bob	Nguyen	bob@gmail.com	t	\N	\N	\N	\N
+\.
+
+
+--
+-- TOC entry 2881 (class 0 OID 26509)
+-- Dependencies: 209
+-- Data for Name: user_role; Type: TABLE DATA; Schema: public; Owner: admin_user
+--
+
+COPY public.user_role (user_id, role_id, created_at, modified_at, added_by, modified_by) FROM stdin;
+\.
+
+
+--
+-- TOC entry 2895 (class 0 OID 0)
+-- Dependencies: 197
+-- Name: answer_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin_user
+--
+
+SELECT pg_catalog.setval('public.answer_id_seq', 1, false);
+
+
+--
+-- TOC entry 2896 (class 0 OID 0)
+-- Dependencies: 199
+-- Name: exam_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin_user
+--
+
+SELECT pg_catalog.setval('public.exam_id_seq', 1, false);
+
+
+--
+-- TOC entry 2897 (class 0 OID 0)
+-- Dependencies: 210
+-- Name: hibernate_sequence; Type: SEQUENCE SET; Schema: public; Owner: admin_user
+--
+
+SELECT pg_catalog.setval('public.hibernate_sequence', 2, true);
+
+
+--
+-- TOC entry 2898 (class 0 OID 0)
+-- Dependencies: 202
+-- Name: role_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin_user
+--
+
+SELECT pg_catalog.setval('public.role_id_seq', 1, false);
+
+
+--
+-- TOC entry 2899 (class 0 OID 0)
+-- Dependencies: 204
+-- Name: student_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin_user
+--
+
+SELECT pg_catalog.setval('public.student_id_seq', 1, false);
+
+
+--
+-- TOC entry 2900 (class 0 OID 0)
+-- Dependencies: 206
+-- Name: subject_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin_user
+--
+
+SELECT pg_catalog.setval('public.subject_id_seq', 1, false);
+
+
+--
+-- TOC entry 2901 (class 0 OID 0)
+-- Dependencies: 208
+-- Name: user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.user_id_seq', 1, false);
+
+
+--
+-- TOC entry 2720 (class 2606 OID 26517)
 -- Name: answer answer_pkey; Type: CONSTRAINT; Schema: public; Owner: admin_user
 --
 
@@ -363,7 +523,7 @@ ALTER TABLE ONLY public.answer
 
 
 --
--- TOC entry 2342 (class 2606 OID 24669)
+-- TOC entry 2722 (class 2606 OID 26519)
 -- Name: exam exam_pkey; Type: CONSTRAINT; Schema: public; Owner: admin_user
 --
 
@@ -372,7 +532,7 @@ ALTER TABLE ONLY public.exam
 
 
 --
--- TOC entry 2326 (class 2606 OID 24616)
+-- TOC entry 2724 (class 2606 OID 26521)
 -- Name: grade grade_pkey; Type: CONSTRAINT; Schema: public; Owner: admin_user
 --
 
@@ -381,7 +541,7 @@ ALTER TABLE ONLY public.grade
 
 
 --
--- TOC entry 2328 (class 2606 OID 24654)
+-- TOC entry 2726 (class 2606 OID 26523)
 -- Name: grade grade_student_id_subject_id_uniq; Type: CONSTRAINT; Schema: public; Owner: admin_user
 --
 
@@ -390,7 +550,7 @@ ALTER TABLE ONLY public.grade
 
 
 --
--- TOC entry 2334 (class 2606 OID 24656)
+-- TOC entry 2728 (class 2606 OID 26525)
 -- Name: role role_name_key; Type: CONSTRAINT; Schema: public; Owner: admin_user
 --
 
@@ -399,7 +559,7 @@ ALTER TABLE ONLY public.role
 
 
 --
--- TOC entry 2336 (class 2606 OID 24635)
+-- TOC entry 2730 (class 2606 OID 26527)
 -- Name: role role_pkey; Type: CONSTRAINT; Schema: public; Owner: admin_user
 --
 
@@ -408,7 +568,7 @@ ALTER TABLE ONLY public.role
 
 
 --
--- TOC entry 2322 (class 2606 OID 24658)
+-- TOC entry 2732 (class 2606 OID 26529)
 -- Name: student student_code_uniq; Type: CONSTRAINT; Schema: public; Owner: admin_user
 --
 
@@ -417,7 +577,7 @@ ALTER TABLE ONLY public.student
 
 
 --
--- TOC entry 2324 (class 2606 OID 24607)
+-- TOC entry 2734 (class 2606 OID 26531)
 -- Name: student student_pkey; Type: CONSTRAINT; Schema: public; Owner: admin_user
 --
 
@@ -426,7 +586,7 @@ ALTER TABLE ONLY public.student
 
 
 --
--- TOC entry 2318 (class 2606 OID 24594)
+-- TOC entry 2736 (class 2606 OID 26533)
 -- Name: subject subject_pkey; Type: CONSTRAINT; Schema: public; Owner: admin_user
 --
 
@@ -435,7 +595,16 @@ ALTER TABLE ONLY public.subject
 
 
 --
--- TOC entry 2330 (class 2606 OID 24624)
+-- TOC entry 2738 (class 2606 OID 26551)
+-- Name: user user_email_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."user"
+    ADD CONSTRAINT user_email_key UNIQUE (email);
+
+
+--
+-- TOC entry 2740 (class 2606 OID 26535)
 -- Name: user user_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -444,30 +613,42 @@ ALTER TABLE ONLY public."user"
 
 
 --
--- TOC entry 2338 (class 2606 OID 24643)
--- Name: user_role_pkey; Type: CONSTRAINT; Schema: public; Owner: admin_user
+-- TOC entry 2744 (class 2606 OID 26537)
+-- Name: user_role user_role_pkey; Type: CONSTRAINT; Schema: public; Owner: admin_user
 --
 
 ALTER TABLE ONLY public.user_role
     ADD CONSTRAINT user_role_pkey PRIMARY KEY (user_id, role_id);
-	
-ALTER TABLE public.user_role ADD CONSTRAINT user_role_user_id_fk FOREIGN KEY (user_id) REFERENCES public.user(id);
-ALTER TABLE public.user_role ADD CONSTRAINT user_role_role_id_fk FOREIGN KEY (role_id) REFERENCES public.role(id);
 
 
 --
--- TOC entry 2332 (class 2606 OID 24645)
+-- TOC entry 2742 (class 2606 OID 26549)
 -- Name: user user_username_key; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public."user"
     ADD CONSTRAINT user_username_key UNIQUE (username);
-	
-ALTER TABLE ONLY public."user"
-    ADD CONSTRAINT user_email_key UNIQUE (email);
 
 
--- Completed on 2019-10-09 00:28:38 +07
+--
+-- TOC entry 2746 (class 2606 OID 26543)
+-- Name: user_role user_role_role_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: admin_user
+--
+
+ALTER TABLE ONLY public.user_role
+    ADD CONSTRAINT user_role_role_id_fk FOREIGN KEY (role_id) REFERENCES public.role(id);
+
+
+--
+-- TOC entry 2745 (class 2606 OID 26538)
+-- Name: user_role user_role_user_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: admin_user
+--
+
+ALTER TABLE ONLY public.user_role
+    ADD CONSTRAINT user_role_user_id_fk FOREIGN KEY (user_id) REFERENCES public."user"(id);
+
+
+-- Completed on 2019-10-25 11:02:55
 
 --
 -- PostgreSQL database dump complete
