@@ -1,10 +1,10 @@
 package net.javaguides.springboot.springsecurity.web.dto;
 
+import net.javaguides.springboot.springsecurity.constraint.FieldMatch;
+
 import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
-
-import net.javaguides.springboot.springsecurity.constraint.FieldMatch;
 
 @FieldMatch.List({
         @FieldMatch(first = "password", second = "confirmPassword", message = "The password fields must match")
@@ -32,6 +32,18 @@ public class UserRegistrationDto {
 
     @AssertTrue
     private Boolean terms;
+
+    public UserRegistrationDto() {
+    }
+
+    public UserRegistrationDto(@NotEmpty String username, @NotEmpty String firstName, @NotEmpty String lastName, @NotEmpty String password, @NotEmpty String confirmPassword, @Email @NotEmpty String email) {
+        this.username = username;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.password = password;
+        this.confirmPassword = confirmPassword;
+        this.email = email;
+    }
 
     public String getUsername() {
         return username;

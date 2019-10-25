@@ -1,11 +1,9 @@
 package net.javaguides.springboot.springsecurity.service;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.stream.Collectors;
-
-import net.javaguides.springboot.springsecurity.repository.RoleRepository;
+import net.javaguides.springboot.springsecurity.model.Role;
+import net.javaguides.springboot.springsecurity.model.User;
+import net.javaguides.springboot.springsecurity.repository.UserRepository;
+import net.javaguides.springboot.springsecurity.web.dto.UserRegistrationDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -14,10 +12,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import net.javaguides.springboot.springsecurity.model.Role;
-import net.javaguides.springboot.springsecurity.model.User;
-import net.javaguides.springboot.springsecurity.repository.UserRepository;
-import net.javaguides.springboot.springsecurity.web.dto.UserRegistrationDto;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -45,7 +42,7 @@ public class UserServiceImpl implements UserService {
         return userRepository.existsByUsername(username);
     }
 
-    public User save(UserRegistrationDto registration){
+    public User createUser(UserRegistrationDto registration, String role){
         User user = new User();
         user.setUsername(registration.getUsername());
         user.setPassword(passwordEncoder.encode(registration.getPassword()));
@@ -54,7 +51,7 @@ public class UserServiceImpl implements UserService {
         user.setEmail(registration.getEmail());
         user.setEnabled(true);
 
-        user.setRoles(Collections.singletonList(roleService.getRoleByName("ROLE_USER")));
+        user.setRoles(Collections.singletonList(roleService.getRoleByName(role)));
         return userRepository.save(user);
     }
 

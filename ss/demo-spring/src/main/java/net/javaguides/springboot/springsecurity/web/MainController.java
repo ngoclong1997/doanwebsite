@@ -9,12 +9,12 @@ public class MainController {
 
     @GetMapping("/")
     public String root() {
-        return "index";
+        return "dashboard/index";
     }
 
     @GetMapping("/login")
     public String login(Model model) {
-        return "login1";
+        return "login";
     }
 
     @GetMapping("/user")
