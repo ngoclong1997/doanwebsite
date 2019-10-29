@@ -1,6 +1,6 @@
 package com.drato.graduationthesis.config;
 
-import com.drato.graduationthesis.dto.UserRegistrationDto;
+import com.drato.graduationthesis.dto.UserDto;
 import com.drato.graduationthesis.service.interfaces.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -60,7 +60,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         if (!userService.usernameExisted("admin")) {
-                UserRegistrationDto regUser = new UserRegistrationDto("admin", "Bob", "Nguyen", "admin", "admin", "bob@drato.com");
+                UserDto regUser = new UserDto("admin", "Bob", "Nguyen", "admin", "admin", "bob@drato.com");
             userService.createUser(regUser, "ROLE_ADMIN");
         }
     }

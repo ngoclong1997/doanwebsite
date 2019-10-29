@@ -9,7 +9,7 @@ import javax.validation.constraints.NotEmpty;
 @FieldMatch.List({
         @FieldMatch(firstField = "password", secondField = "confirmPassword", message = "The password fields must match")
 })
-public class UserRegistrationDto {
+public class UserDto {
 
     @NotEmpty
     private String username;
@@ -33,10 +33,10 @@ public class UserRegistrationDto {
     @AssertTrue
     private Boolean terms;
 
-    public UserRegistrationDto() {
+    public UserDto() {
     }
 
-    public UserRegistrationDto(@NotEmpty String username, @NotEmpty String firstName, @NotEmpty String lastName, @NotEmpty String password, @NotEmpty String confirmPassword, @Email @NotEmpty String email) {
+    public UserDto(@NotEmpty String username, @NotEmpty String firstName, @NotEmpty String lastName, @NotEmpty String password, @NotEmpty String confirmPassword, @Email @NotEmpty String email) {
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;

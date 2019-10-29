@@ -1,6 +1,6 @@
 package com.drato.graduationthesis.controller;
 
-import com.drato.graduationthesis.dto.UserRegistrationDto;
+import com.drato.graduationthesis.dto.UserDto;
 import com.drato.graduationthesis.service.interfaces.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,8 +21,8 @@ public class UserRegistrationController {
     private UserService userService;
 
     @ModelAttribute("user")
-    public UserRegistrationDto userRegistrationDto() {
-        return new UserRegistrationDto();
+    public UserDto userRegistrationDto() {
+        return new UserDto();
     }
 
     @GetMapping
@@ -31,7 +31,7 @@ public class UserRegistrationController {
     }
 
     @PostMapping
-    public String registerUserAccount(@ModelAttribute("user") @Valid UserRegistrationDto userDto, BindingResult result){
+    public String registerUserAccount(@ModelAttribute("user") @Valid UserDto userDto, BindingResult result){
 
         if (userService.emailExisted(userDto.getEmail())) {
             result.rejectValue("email", null, "Email đã tồn tại");

@@ -1,6 +1,6 @@
 package com.drato.graduationthesis.service.implementation;
 
-import com.drato.graduationthesis.dto.UserRegistrationDto;
+import com.drato.graduationthesis.dto.UserDto;
 import com.drato.graduationthesis.model.Role;
 import com.drato.graduationthesis.model.User;
 import com.drato.graduationthesis.repository.UserRepository;
@@ -16,6 +16,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -35,6 +37,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User findById(Long id) {
+        Optional<User> optionalUser = userRepository.findById(id);
+        if (optionalUser.isPresent()) {
+            return optionalUser.get();
+        } else {
+            return null;
+        }
+    }
+
+    @Override
     public boolean emailExisted(String email) {
         return userRepository.existsByEmail(email);
     }
@@ -44,7 +56,12 @@ public class UserServiceImpl implements UserService {
         return userRepository.existsByUsername(username);
     }
 
-    public User createUser(UserRegistrationDto registration, String role){
+    @Override
+    public List<User> getAllUser() {
+        return userRepository.findAll();
+    }
+
+    public User createUser(UserDto registration, String role){
         User user = new User();
         user.setUsername(registration.getUsername());
         user.setPassword(passwordEncoder.encode(registration.getPassword()));
