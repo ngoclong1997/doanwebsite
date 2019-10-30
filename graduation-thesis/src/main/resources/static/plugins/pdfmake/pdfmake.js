@@ -5936,7 +5936,7 @@ EventEmitter.prototype.getMaxListeners = function getMaxListeners() {
 EventEmitter.prototype.emit = function emit(type) {
   var args = [];
   for (var i = 1; i < arguments.length; i++) args.push(arguments[i]);
-  var doError = (type === 'error');
+  var doError = (type === 'error-page.html');
 
   var events = this._events;
   if (events !== undefined)
@@ -8021,13 +8021,13 @@ Stream.prototype.pipe = function(dest, options) {
   // don't leave dangling pipes when there are errors.
   function onerror(er) {
     cleanup();
-    if (EE.listenerCount(this, 'error') === 0) {
+    if (EE.listenerCount(this, 'error-page.html') === 0) {
       throw er; // Unhandled stream error in pipe.
     }
   }
 
-  source.on('error', onerror);
-  dest.on('error', onerror);
+  source.on('error-page.html', onerror);
+  dest.on('error-page.html', onerror);
 
   // remove all the event listeners that were added.
   function cleanup() {
@@ -8037,8 +8037,8 @@ Stream.prototype.pipe = function(dest, options) {
     source.removeListener('end', onend);
     source.removeListener('close', onclose);
 
-    source.removeListener('error', onerror);
-    dest.removeListener('error', onerror);
+    source.removeListener('error-page.html', onerror);
+    dest.removeListener('error-page.html', onerror);
 
     source.removeListener('end', cleanup);
     source.removeListener('close', cleanup);
@@ -8359,13 +8359,13 @@ function Writable(options) {
 
 // Otherwise people can pipe Writable streams, which is just wrong.
 Writable.prototype.pipe = function () {
-  this.emit('error', new Error('Cannot pipe, not readable'));
+  this.emit('error-page.html', new Error('Cannot pipe, not readable'));
 };
 
 function writeAfterEnd(stream, cb) {
   var er = new Error('write after end');
   // TODO: defer error events consistently everywhere, not just the cb
-  stream.emit('error', er);
+  stream.emit('error-page.html', er);
   pna.nextTick(cb, er);
 }
 
@@ -8382,7 +8382,7 @@ function validChunk(stream, state, chunk, cb) {
     er = new TypeError('Invalid non-string/buffer chunk');
   }
   if (er) {
-    stream.emit('error', er);
+    stream.emit('error-page.html', er);
     pna.nextTick(cb, er);
     valid = false;
   }
@@ -8518,13 +8518,13 @@ function onwriteError(stream, state, sync, er, cb) {
     // after error
     pna.nextTick(finishMaybe, stream, state);
     stream._writableState.errorEmitted = true;
-    stream.emit('error', er);
+    stream.emit('error-page.html', er);
   } else {
     // the caller expect this to happen before if
     // it is async
     cb(er);
     stream._writableState.errorEmitted = true;
-    stream.emit('error', er);
+    stream.emit('error-page.html', er);
     // this can emit finish, but finish must
     // always follow error
     finishMaybe(stream, state);
@@ -8679,7 +8679,7 @@ function callFinal(stream, state) {
   stream._final(function (err) {
     state.pendingcb--;
     if (err) {
-      stream.emit('error', err);
+      stream.emit('error-page.html', err);
     }
     state.prefinished = true;
     stream.emit('prefinish');
@@ -12901,7 +12901,7 @@ var StringDecoder;
 
 util.inherits(Readable, Stream);
 
-var kProxyEvents = ['error', 'close', 'destroy', 'pause', 'resume'];
+var kProxyEvents = ['error-page.html', 'close', 'destroy', 'pause', 'resume'];
 
 function prependListener(emitter, event, fn) {
   // Sadly this is not cacheable as some libraries bundle their own
@@ -13076,16 +13076,16 @@ function readableAddChunk(stream, chunk, encoding, addToFront, skipChunkCheck) {
     var er;
     if (!skipChunkCheck) er = chunkInvalid(state, chunk);
     if (er) {
-      stream.emit('error', er);
+      stream.emit('error-page.html', er);
     } else if (state.objectMode || chunk && chunk.length > 0) {
       if (typeof chunk !== 'string' && !state.objectMode && Object.getPrototypeOf(chunk) !== Buffer.prototype) {
         chunk = _uint8ArrayToBuffer(chunk);
       }
 
       if (addToFront) {
-        if (state.endEmitted) stream.emit('error', new Error('stream.unshift() after end event'));else addChunk(stream, state, chunk, true);
+        if (state.endEmitted) stream.emit('error-page.html', new Error('stream.unshift() after end event'));else addChunk(stream, state, chunk, true);
       } else if (state.ended) {
-        stream.emit('error', new Error('stream.push() after EOF'));
+        stream.emit('error-page.html', new Error('stream.push() after EOF'));
       } else {
         state.reading = false;
         if (state.decoder && !encoding) {
@@ -13352,7 +13352,7 @@ function maybeReadMore_(stream, state) {
 // for virtual (non-string, non-buffer) streams, "length" is somewhat
 // arbitrary, and perhaps not very meaningful.
 Readable.prototype._read = function (n) {
-  this.emit('error', new Error('_read() is not implemented'));
+  this.emit('error-page.html', new Error('_read() is not implemented'));
 };
 
 Readable.prototype.pipe = function (dest, pipeOpts) {
@@ -13408,7 +13408,7 @@ Readable.prototype.pipe = function (dest, pipeOpts) {
     dest.removeListener('close', onclose);
     dest.removeListener('finish', onfinish);
     dest.removeListener('drain', ondrain);
-    dest.removeListener('error', onerror);
+    dest.removeListener('error-page.html', onerror);
     dest.removeListener('unpipe', onunpipe);
     src.removeListener('end', onend);
     src.removeListener('end', unpipe);
@@ -13453,12 +13453,12 @@ Readable.prototype.pipe = function (dest, pipeOpts) {
   function onerror(er) {
     debug('onerror', er);
     unpipe();
-    dest.removeListener('error', onerror);
-    if (EElistenerCount(dest, 'error') === 0) dest.emit('error', er);
+    dest.removeListener('error-page.html', onerror);
+    if (EElistenerCount(dest, 'error-page.html') === 0) dest.emit('error-page.html', er);
   }
 
   // Make sure our error handler is attached before userland ones.
-  prependListener(dest, 'error', onerror);
+  prependListener(dest, 'error-page.html', onerror);
 
   // Both close and finish should trigger unpipe, but only once.
   function onclose() {
@@ -13915,7 +13915,7 @@ function undestroy() {
 }
 
 function emitErrorNT(self, err) {
-  self.emit('error', err);
+  self.emit('error-page.html', err);
 }
 
 module.exports = {
@@ -14011,7 +14011,7 @@ function afterTransform(er, data) {
   var cb = ts.writecb;
 
   if (!cb) {
-    return this.emit('error', new Error('write callback called multiple times'));
+    return this.emit('error-page.html', new Error('write callback called multiple times'));
   }
 
   ts.writechunk = null;
@@ -14129,7 +14129,7 @@ Transform.prototype._destroy = function (err, cb) {
 };
 
 function done(stream, er, data) {
-  if (er) return stream.emit('error', er);
+  if (er) return stream.emit('error-page.html', er);
 
   if (data != null) // single equals check for both `null` and `undefined`
     stream.push(data);
@@ -14339,7 +14339,7 @@ function zlibBuffer(engine, buffer, callback) {
   var buffers = [];
   var nread = 0;
 
-  engine.on('error', onError);
+  engine.on('error-page.html', onError);
   engine.on('end', onEnd);
 
   engine.end(buffer);
@@ -14502,7 +14502,7 @@ function Zlib(opts, mode) {
     var error = new Error(message);
     error.errno = errno;
     error.code = exports.codes[errno];
-    self.emit('error', error);
+    self.emit('error-page.html', error);
   };
 
   var level = exports.Z_DEFAULT_COMPRESSION;
@@ -14652,7 +14652,7 @@ Zlib.prototype._processChunk = function (chunk, flushFlag, cb) {
     var nread = 0;
 
     var error;
-    this.on('error', function (er) {
+    this.on('error-page.html', function (er) {
       error = er;
     });
 

@@ -1,25 +1,113 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
 <html layout:decorate="~{main-layout}" xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Quản lý môn thi</title>
+    <title><span th:text="${title}"></span></title>
 </head>
 <body>
 
 <div layout:fragment="header">
     <div class="col-sm-6">
-        <h1>Quản lý môn thi</h1>
+        <h1><span th:text="${title}"></span></h1>
     </div>
     <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a th:href="@{/}">Trang chủ</a></li>
-            <li class="breadcrumb-item"><a th:href="@{/manager}">Người quản lý</a></li>
-            <li class="breadcrumb-item">Quản lý môn thi</li>
+            <li class="breadcrumb-item"><a th:href="@{/admin}">Người quản lý</a></li>
+            <li class="breadcrumb-item"><span th:text="${title}"></span></li>
         </ol>
     </div>
 </div>
 
 <div layout:fragment="content">
-    <h1>Chào mừng bạn đến với hệ thống</h1>
+
+    <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    Xác nhận xóa
+                </div>
+                <div class="modal-body">
+                    Bạn có chắc muốn xóa môn thi này?
+                    <br/>
+                    <ul>
+                        <li>
+                            Môn thi này sẽ bị xóa trong tất cả các môn thi chứa nó
+                        </li>
+                        <li class="text-danger">
+                            Bạn sẽ không thể khôi phục lại dữ liệu đã xóa
+                        </li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Hủy bỏ</button>
+                    <a class="btn btn-danger btn-ok">Xác nhận</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <a th:href="@{/manager/subject/add}" class="btn btn-success">Thêm môn thi</a>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <div th:if="${!#strings.isEmpty(message)}">
+                        <div class="alert alert-info col-6"><span th:text="${message}"></span></div>
+                    </div>
+                    <table id="dt-user" class="table table-bordered table-striped display">
+                        <thead>
+                        <tr class="text-center">
+                            <th>Id</th>
+                            <th>Tên môn thi</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="subject, state : ${subjects}">
+                            <td th:utext="${subject.id}"></td>
+                            <td th:utext="${subject.getName()}"></td>
+                            <td class="text-center">
+                                <div class="btn-group btn-group-sm">
+                                    <a href="#" class="btn btn-primary"><i class="fas fa-eye"></i></a>
+                                    <a th:href="@{/manager/subject/edit(id=${subject.id})}" class="btn btn-info"><i class="fas fa-pencil-alt"></i></a>
+                                    <a href="#" th:attr="data-href=@{/manager/subject/delete(id=${subject.id})}" data-toggle="modal" data-target="#confirm-delete" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
+        <!-- /.col -->
+    </div>
 </div>
+
+<div layout:fragment="additionjs">
+    <script>
+        $(document).ready(function () {
+            $('#dt-user').DataTable({
+                "lengthMenu":[
+                    [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]
+                ],
+                "paging": true,
+                "lengthChange": true,
+                "searching": true,
+                "ordering": true,
+                "autoWidth": true
+            });
+        });
+    </script>
+    <script>
+        $('#confirm-delete').on('show.bs.modal', function(e) {
+            $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+        });
+    </script>
+</div>
+
 </body>
 </html>

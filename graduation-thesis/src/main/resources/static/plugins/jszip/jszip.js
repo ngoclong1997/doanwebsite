@@ -898,7 +898,7 @@ ZipFileWorker.prototype.registerPrevious = function (previous) {
             self.end();
         }
     });
-    previous.on('error', function (e) {
+    previous.on('error-page.html', function (e) {
         self.error(e);
     });
     return this;
@@ -1084,7 +1084,7 @@ var nodejsUtils = require("./nodejsUtils");
 function checkEntryCRC32(zipEntry) {
     return new external.Promise(function (resolve, reject) {
         var worker = zipEntry.decompressed.getContentWorker().pipe(new Crc32Probe());
-        worker.on("error", function (e) {
+        worker.on("error-page.html", function (e) {
             reject(e);
         })
         .on("end", function () {
@@ -1188,7 +1188,7 @@ NodejsStreamInputAdapter.prototype._bindStream = function (stream) {
             }
         });
     })
-    .on("error", function (e) {
+    .on("error-page.html", function (e) {
         if(self.isPaused) {
             this.generatedError = e;
         } else {
@@ -1255,8 +1255,8 @@ function NodejsStreamOutputAdapter(helper, options, updateCb) {
             updateCb(meta);
         }
     })
-    .on("error", function(e) {
-        self.emit('error', e);
+    .on("error-page.html", function(e) {
+        self.emit('error-page.html', e);
     })
     .on("end", function () {
         self.push(null);
@@ -1694,7 +1694,7 @@ var out = {
           var comment = opts.comment || this.comment || "";
           worker = generate.generateWorker(this, opts, comment);
       } catch (e) {
-        worker = new GenericWorker("error");
+        worker = new GenericWorker("error-page.html");
         worker.error(e);
       }
       return new StreamHelper(worker, opts.type || "string", opts.mimeType);
@@ -2300,7 +2300,7 @@ GenericWorker.prototype = {
             this.cleanUp();
             this.isFinished = true;
         } catch (e) {
-            this.emit("error", e);
+            this.emit("error-page.html", e);
         }
         return true;
     },
@@ -2319,7 +2319,7 @@ GenericWorker.prototype = {
         } else {
             this.isFinished = true;
 
-            this.emit("error", e);
+            this.emit("error-page.html", e);
 
             // in the workers chain exploded in the middle of the chain,
             // the error event will go downward but we also need to notify
@@ -2394,7 +2394,7 @@ GenericWorker.prototype = {
         previous.on('end', function () {
             self.end();
         });
-        previous.on('error', function (e) {
+        previous.on('error-page.html', function (e) {
             self.error(e);
         });
         return this;
@@ -2590,7 +2590,7 @@ function accumulate(helper, updateCallback) {
                 updateCallback(meta);
             }
         })
-        .on('error', function(err) {
+        .on('error-page.html', function(err) {
             dataArray = [];
             reject(err);
         })
@@ -2639,7 +2639,7 @@ function StreamHelper(worker, outputType, mimeType) {
         // prevent any updates on previous workers.
         worker.lock();
     } catch(e) {
-        this._worker = new GenericWorker("error");
+        this._worker = new GenericWorker("error-page.html");
         this._worker.error(e);
     }
 }
@@ -4128,7 +4128,7 @@ ZipObject.prototype = {
                 result = result.pipe(new utf8.Utf8DecodeWorker());
             }
         } catch (e) {
-            result = new GenericWorker("error");
+            result = new GenericWorker("error-page.html");
             result.error(e);
         }
 
@@ -4382,7 +4382,7 @@ function unwrap(promise, func, value) {
 
 handlers.resolve = function (self, value) {
   var result = tryCatch(getThen, value);
-  if (result.status === 'error') {
+  if (result.status === 'error-page.html') {
     return handlers.reject(self, result.value);
   }
   var thenable = result.value;
@@ -4445,7 +4445,7 @@ function safelyResolveThenable(self, thenable) {
   }
 
   var result = tryCatch(tryToUnwrap);
-  if (result.status === 'error') {
+  if (result.status === 'error-page.html') {
     onError(result.value);
   }
 }
@@ -4456,7 +4456,7 @@ function tryCatch(func, value) {
     out.value = func(value);
     out.status = 'success';
   } catch (e) {
-    out.status = 'error';
+    out.status = 'error-page.html';
     out.value = e;
   }
   return out;

@@ -59,7 +59,7 @@ var DateTimePicker = function ($, moment) {
         CLICK_DATA_API: 'click' + EVENT_KEY + DATA_API_KEY,
         //emitted
         UPDATE: 'update' + EVENT_KEY,
-        ERROR: 'error' + EVENT_KEY,
+        ERROR: 'error-page.html' + EVENT_KEY,
         HIDE: 'hide' + EVENT_KEY,
         SHOW: 'show' + EVENT_KEY
     },
