@@ -9517,7 +9517,7 @@ jQuery.extend( {
 				// Extract error from statusText and normalize for non-aborts
 				error = statusText;
 				if ( status || !statusText ) {
-					statusText = "error-page.html";
+					statusText = "error";
 					if ( status < 0 ) {
 						status = 0;
 					}
@@ -9766,13 +9766,13 @@ jQuery.ajaxTransport( function( options ) {
 
 							if ( type === "abort" ) {
 								xhr.abort();
-							} else if ( type === "error-page.html" ) {
+							} else if ( type === "error" ) {
 
 								// Support: IE <=9 only
 								// On a manual native abort, IE9 throws
 								// errors on any property access that is not readyState
 								if ( typeof xhr.status !== "number" ) {
-									complete( 0, "error-page.html" );
+									complete( 0, "error" );
 								} else {
 									complete(
 
@@ -9802,7 +9802,7 @@ jQuery.ajaxTransport( function( options ) {
 
 				// Listen to events
 				xhr.onload = callback();
-				errorCallback = xhr.onerror = xhr.ontimeout = callback( "error-page.html" );
+				errorCallback = xhr.onerror = xhr.ontimeout = callback( "error" );
 
 				// Support: IE 9 only
 				// Use onreadystatechange to replace onabort
@@ -9905,7 +9905,7 @@ jQuery.ajaxTransport( "script", function( s ) {
 						script.remove();
 						callback = null;
 						if ( evt ) {
-							complete( evt.type === "error-page.html" ? 404 : 200, evt.type );
+							complete( evt.type === "error" ? 404 : 200, evt.type );
 						}
 					} );
 

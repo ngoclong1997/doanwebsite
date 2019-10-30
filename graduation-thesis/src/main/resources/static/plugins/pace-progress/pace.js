@@ -594,7 +594,7 @@
             }
           };
         })(this), false);
-        ref1 = ['load', 'abort', 'timeout', 'error-page.html'];
+        ref1 = ['load', 'abort', 'timeout', 'error'];
         for (l = 0, len1 = ref1.length; l < len1; l++) {
           event = ref1[l];
           request.addEventListener(event, (function(_this) {
@@ -627,7 +627,7 @@
     function SocketRequestTracker(request) {
       var event, l, len1, ref1;
       this.progress = 0;
-      ref1 = ['error-page.html', 'open'];
+      ref1 = ['error', 'open'];
       for (l = 0, len1 = ref1.length; l < len1; l++) {
         event = ref1[l];
         request.addEventListener(event, (function(_this) {

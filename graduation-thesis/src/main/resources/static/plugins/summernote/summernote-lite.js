@@ -5196,7 +5196,7 @@
               _this.setLastRange();
               _this.afterCommand();
           }).fail(function (e) {
-              _this.context.triggerEvent('image.upload.error-page.html', e);
+              _this.context.triggerEvent('image.upload.error', e);
           });
       };
       /**
@@ -5208,13 +5208,13 @@
           $$1.each(files, function (idx, file) {
               var filename = file.name;
               if (_this.options.maximumImageFileSize && _this.options.maximumImageFileSize < file.size) {
-                  _this.context.triggerEvent('image.upload.error-page.html', _this.lang.image.maximumFileSizeError);
+                  _this.context.triggerEvent('image.upload.error', _this.lang.image.maximumFileSizeError);
               }
               else {
                   readFileAsDataURL(file).then(function (dataURL) {
                       return _this.insertImage(dataURL, filename);
                   }).fail(function () {
-                      _this.context.triggerEvent('image.upload.error-page.html');
+                      _this.context.triggerEvent('image.upload.error');
                   });
               }
           });
