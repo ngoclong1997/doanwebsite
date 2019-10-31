@@ -10,6 +10,5 @@ import java.util.List;
 @Repository
 public interface SubjectRepository extends JpaRepository<Subject, Long> {
     Subject findByName(String name);
-
     boolean existsByName(String name);
 }

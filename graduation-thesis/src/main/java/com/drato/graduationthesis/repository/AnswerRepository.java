@@ -8,7 +8,8 @@ import java.util.List;
 
 @Repository
 public interface AnswerRepository extends JpaRepository<Answer, Long> {
-    public Answer findByExamCodeAndExamId(String examCode, Long examId);
     public List<Answer> findAllByExamId(Long examId);
     public void deleteAllByExamId(Long examId);
+
+    List<Answer> findAllByExamIdAndSubjectId(Long examId, Long subjectId);
 }

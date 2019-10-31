@@ -10,9 +10,9 @@ public interface AnswerService {
 
     public Answer getById(Long id);
 
-    public Answer getByExamCodeAndExamId(String examCode, Long examId);
-
     public List<Answer> getAllByExamId(Long examId);
+
+    public List<Answer> getAllByExamAndSubject(Long examId, Long subjectId);
 
     public void deleteByExamId(Long examId);
 

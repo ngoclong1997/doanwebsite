@@ -17,11 +17,11 @@ public class Answer implements Serializable {
     @Column(name = "subject_id")
     private Long subjectId;
 
+    @Column(name = "test_code")
+    private String testCode;
+
     @Column(name = "exam_id")
     private Long examId;
-
-    @Column(name = "exam_code")
-    private String examCode;
 
     @Column(name = "answers")
     private String answers;
@@ -42,6 +42,23 @@ public class Answer implements Serializable {
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date modifiedDate;
 
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getTestCode() {
+        return testCode;
+    }
+
+    public void setTestCode(String testCode) {
+        this.testCode = testCode;
+    }
+
     public Long getExamId() {
         return examId;
     }
@@ -56,14 +73,6 @@ public class Answer implements Serializable {
 
     public void setSubjectId(Long subjectId) {
         this.subjectId = subjectId;
-    }
-
-    public String getExamCode() {
-        return examCode;
-    }
-
-    public void setExamCode(String examCode) {
-        this.examCode = examCode;
     }
 
     public String getAnswers() {

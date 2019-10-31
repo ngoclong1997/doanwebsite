@@ -1,60 +1,55 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
 <html layout:decorate="~{main-layout}" xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Quản lý đáp án</title>
+    <title><span th:text="${title}"></span></title>
 </head>
 <body>
 
 <div layout:fragment="header">
     <div class="col-sm-6">
-        <h1>Quản lý đáp án</h1>
+        <h1><span th:text="${title}"></span></h1>
     </div>
     <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a th:href="@{/}">Trang chủ</a></li>
-            <li class="breadcrumb-item"><a th:href="@{/manager}">Người quản lý</a></li>
-            <li class="breadcrumb-item">Admin</li>
+            <li class="breadcrumb-item"><a th:href="@{/admin}">Người quản lý</a></li>
+            <li class="breadcrumb-item"><span th:text="${title}"></span></li>
         </ol>
     </div>
 </div>
+
 
 <div layout:fragment="content">
     <div class="row">
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Chọn kỳ thi</label>
-                                <select class="form-control select2" style="width: 100%;">
-                                    <option selected="selected">Alabama</option>
-                                    <option>Alaska</option>
-                                    <option>California</option>
-                                    <option>Delaware</option>
-                                    <option>Tennessee</option>
-                                    <option>Texas</option>
-                                    <option>Washington</option>
-                                </select>
+                    <label>Chọn kỳ thi và môn thi để xem đáp án</label>
+                    <form th:action="@{/manager/answer}" th:object="${examSubjectDto}" method="post">
+                        <div class="row">
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <select id="slc-exam" th:field="*{examId}" th:classappend="${#fields.hasErrors('examId')}? 'is-invalid':''" class="form-control select2" style="width: 100%;">
+                                        <option value="">---Chọn kỳ thi---</option>
+                                        <option th:each="exam, state : ${exams}" th:value="${exam.id}" th:text="${exam.name}"></option>
+                                    </select>
+                                    <div class="invalid-feedback" th:each="error: ${#fields.errors('examId')}" th:text="${error}"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <select id="slc-subjects" th:classappend="${#fields.hasErrors('subjectId')}? 'is-invalid':''" th:field="*{subjectId}" class="form-control select2" style="width: 100%;">
+                                        <option value="">---Chọn môn thi---</option>
+                                        <option th:each="subject, state : ${subjects}" th:value="${subject.id}" th:text="${subject.name}"></option>
+                                    </select>
+                                    <div class="invalid-feedback" th:each="error: ${#fields.errors('subjectId')}" th:text="${error}"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <input type="submit" class="btn btn-success" value="Lấy danh sách đáp án"/>
                             </div>
                         </div>
-                        <!-- /.col -->
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Chọn môn thi</label>
-                                <select class="form-control select2" style="width: 100%;">
-                                    <option selected="selected">Alabama</option>
-                                    <option>Alaska</option>
-                                    <option>California</option>
-                                    <option>Delaware</option>
-                                    <option>Tennessee</option>
-                                    <option>Texas</option>
-                                    <option>Washington</option>
-                                </select>
-                            </div>
-                        </div>
-                        <!-- /.col -->
-                    </div>
+                    </form>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
@@ -65,31 +60,20 @@
                     <table id="dt-user" class="table table-bordered table-striped display">
                         <thead>
                         <tr class="text-center">
-                            <th>Id</th>
-                            <th>Tên đăng nhập</th>
-                            <th>Họ đệm</th>
-                            <th>Tên</th>
-                            <th>Email</th>
-                            <th>Role</th>
+                            <th >Mã đề</th>
+                            <th>Đáp án</th>
                             <th>Action</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="user, state : ${users}">
+                        <tr th:each="answer, state : ${answers}">
 
-                            <td th:utext="${user.id}"></td>
-                            <td th:utext="${user.username}"></td>
-                            <td th:utext="${user.lastName}"></td>
-                            <td th:utext="${user.firstName}"></td>
-                            <td th:utext="${user.email}"></td>
-                            <td th:utext="${user.roles[0].getName()}"></td>
+                            <td class="text-center" th:utext="${answer.testCode}"></td>
+                            <td th:utext="${answer.answers}"></td>
                             <td class="text-center">
-                                <div class="btn-group btn-group-sm">
-                                    <a href="#" class="btn btn-primary"><i class="fas fa-eye"></i></a>
-                                    <a th:href="@{/admin/user/edit(id=${user.id})}" class="btn btn-info"><i class="fas fa-pencil-alt"></i></a>
-                                    <a href="#" th:attr="data-href=@{/admin/user/delete(id=${user.id})}" data-toggle="modal" data-target="#confirm-delete" class="btn btn-danger"><i class="fas fa-trash"></i></a>
-                                </div>
+                                <a th:href="@{/manager/answer/edit(id=${answer.id})}" class="btn btn-primary"><i class="fas fa-eye"></i></a>
                             </td>
+
                         </tr>
                         </tbody>
                     </table>
@@ -101,11 +85,61 @@
         <!-- /.col -->
     </div>
 </div>
+
 <div layout:fragment="additionjs">
     <script>
         $('.select2').select2()
+
+        $('#slc-exam').change(function () {
+            addExamSubjects(this.value)
+        })
+
+        function addExamSubjects(examId) {
+            $.ajax({
+                type : "GET",
+                contentType : "application/json",
+                url : "/manager/answer/getExamSubjects?examId="+examId,
+                dataType : 'json',
+                timeout : 100000,
+                success : function(response) {
+                    var html = '';
+                    $.each(response, function (id, subject) {
+                        html += '<option value="' + subject.id + '">' + subject.name + '</option>'
+                    })
+                    $('#slc-subjects').html(html);
+                },
+                error : function(e) {
+                    alert(JSON.stringify(e));
+                }
+            });
+        }
+        $('#dt-user').DataTable({
+            "lengthMenu":[
+                [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]
+            ],
+            "language": {
+                "emptyTable": "Môn thi này chưa được nhập đáp án",
+                "info": "Đang hiển thị _START_ - _END_ trên tổng cộng _TOTAL_ bản ghi",
+                "infoEmpty":      "Không có bản ghi",
+                "paginate": {
+                    "first":      "Trang đầu",
+                    "last":       "Trang cuối",
+                    "next":       "Trang tiếp",
+                    "previous":   "Trang trước"
+                }
+            },
+            "paging": true,
+            "lengthChange": true,
+            "searching": true,
+            "ordering": true,
+            "autoWidth": true,
+            "columnDefs": [
+                { "width": "10%", "targets": 0 },
+                { "width": "80%", "targets": 1 },
+                { "width": "10%", "targets": 1 }
+            ],
+        });
     </script>
 </div>
-
 </body>
 </html>

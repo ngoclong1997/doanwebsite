@@ -27,13 +27,13 @@ public class AnswerServiceImpl implements AnswerService {
     }
 
     @Override
-    public Answer getByExamCodeAndExamId(String examCode, Long examId) {
-        return repository.findByExamCodeAndExamId(examCode, examId);
+    public List<Answer> getAllByExamId(Long examId) {
+        return repository.findAllByExamId(examId);
     }
 
     @Override
-    public List<Answer> getAllByExamId(Long examId) {
-        return repository.findAllByExamId(examId);
+    public List<Answer> getAllByExamAndSubject(Long examId, Long subjectId) {
+        return repository.findAllByExamIdAndSubjectId(examId, subjectId);
     }
 
     @Override
