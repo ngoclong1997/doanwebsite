@@ -14,6 +14,11 @@ public class MainController {
         return "dashboard/index";
     }
 
+    @GetMapping("/i18n")
+    public String getInternationalPage() {
+        return "i18n";
+    }
+
     @GetMapping("/login")
     public String login(Model model) {
         return "login";

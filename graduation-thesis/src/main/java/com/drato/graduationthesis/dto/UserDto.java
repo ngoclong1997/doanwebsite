@@ -10,7 +10,7 @@ import javax.validation.constraints.*;
 public class UserDto {
 
     @NotEmpty(message = "Trường này không được bỏ trống")
-    @Size(min = 3, max = 50, message = "Trường này phải lớn hơn 4 và nhỏ hơn 50 ký tự")
+    @Size(min = 3, max = 50, message = "Trường này phải lớn hơn 3 và nhỏ hơn 50 ký tự")
     private String username;
 
     @NotEmpty(message = "Trường này không được bỏ trống")
@@ -22,16 +22,16 @@ public class UserDto {
     private String lastName;
 
     @NotEmpty(message = "Trường này không được bỏ trống")
-    @Size(min=6, max = 50, message = "Trường này phải lớn hơn 6 và nhỏ hơn 50 ký tự")
+    @Size(min=5, max = 50, message = "Trường này phải lớn hơn 5 và nhỏ hơn 50 ký tự")
     private String password;
 
     @NotEmpty(message = "Trường này không được bỏ trống")
-    @Size(min=6, max = 50, message = "Trường này phải lớn hơn 6 và nhỏ hơn 50 ký tự")
+    @Size(min=5, max = 50, message = "Trường này phải lớn hơn 5 và nhỏ hơn 50 ký tự")
     private String confirmPassword;
 
     @Email
     @NotEmpty(message = "Trường này không được bỏ trống")
-    @Size(min=6, max = 50, message = "Trường này phải lớn hơn 6 và nhỏ hơn 50 ký tự")
+    @Size(min=5, max =100, message = "Trường này phải lớn hơn 5 và nhỏ hơn 100 ký tự")
     private String email;
 
     @NotEmpty(message = "Trường này không @được bỏ trống")
@@ -40,7 +40,7 @@ public class UserDto {
     public UserDto() {
     }
 
-    public UserDto(@NotEmpty(message = "Trường này không được bỏ trống") @Size(min = 3, max = 50, message = "Trường này phải lớn hơn 4 và nhỏ hơn 50 ký tự") String username, @NotEmpty(message = "Trường này không được bỏ trống") @Size(max = 50, message = "Trường này phải nhỏ hơn 50 ký tự") String firstName, @NotEmpty(message = "Trường này không được bỏ trống") @Size(max = 50, message = "Trường này phải nhỏ hơn 50 ký tự") String lastName, @NotEmpty(message = "Trường này không được bỏ trống") @Size(min = 6, max = 50, message = "Trường này phải lớn hơn 6 và nhỏ hơn 50 ký tự") String password, @NotEmpty(message = "Trường này không được bỏ trống") @Size(min = 6, max = 50, message = "Trường này phải lớn hơn 6 và nhỏ hơn 50 ký tự") String confirmPassword, @Email @NotEmpty(message = "Trường này không được bỏ trống") @Size(min = 6, max = 50, message = "Trường này phải lớn hơn 6 và nhỏ hơn 50 ký tự") String email, @NotEmpty(message = "Trường này không @được bỏ trống") String role) {
+    public UserDto(@NotEmpty(message = "Trường này không được bỏ trống") @Size(min = 3, max = 50, message = "Trường này phải lớn hơn 3 và nhỏ hơn 50 ký tự") String username, @NotEmpty(message = "Trường này không được bỏ trống") @Size(max = 50, message = "Trường này phải nhỏ hơn 50 ký tự") String firstName, @NotEmpty(message = "Trường này không được bỏ trống") @Size(max = 50, message = "Trường này phải nhỏ hơn 50 ký tự") String lastName, @NotEmpty(message = "Trường này không được bỏ trống") @Size(min = 5, max = 50, message = "Trường này phải lớn hơn 5 và nhỏ hơn 50 ký tự") String password, @NotEmpty(message = "Trường này không được bỏ trống") @Size(min = 5, max = 50, message = "Trường này phải lớn hơn 5 và nhỏ hơn 50 ký tự") String confirmPassword, @Email @NotEmpty(message = "Trường này không được bỏ trống") @Size(min = 5, max = 100, message = "Trường này phải lớn hơn 5 và nhỏ hơn 100 ký tự") String email, @NotEmpty(message = "Trường này không @được bỏ trống") String role) {
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;

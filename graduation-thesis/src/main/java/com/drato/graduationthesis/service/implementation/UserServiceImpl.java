@@ -113,10 +113,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user;
+        User user = null;
         try {
             user = userRepository.findByUsername(username);
         } catch (Exception e) {
+            throw new UsernameNotFoundException("Invalid username or password.");
+        }
+        if (user == null) {
             throw new UsernameNotFoundException("Invalid username or password.");
         }
         return new org.springframework.security.core.userdetails.User(user.getUsername(),

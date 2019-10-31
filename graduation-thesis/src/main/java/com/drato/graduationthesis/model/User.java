@@ -29,17 +29,17 @@ public class User {
 
     @Column(name = "lastname")
     @NotEmpty(message = "Trường này không được bỏ trống")
-    @Size(max = 50, message = "Trường này phải nhỏ hơn 50 ký tự")
+    @Size(max = 100, message = "Trường này phải nhỏ hơn 100 ký tự")
     private String lastName;
 
     @Column(name = "email")
     @NotEmpty(message = "Trường này không được bỏ trống")
-    @Size(min=6, max = 50, message = "Trường này phải lớn hơn 6 và nhỏ hơn 50 ký tự")
+    @Size(min=5, max = 250, message = "Trường này phải lớn hơn 5 và nhỏ hơn 250 ký tự")
     private String email;
 
     @Column(name = "password")
     @NotEmpty(message = "Trường này không được bỏ trống")
-    @Size(min=6, max = 50, message = "Trường này phải lớn hơn 6 và nhỏ hơn 50 ký tự")
+    @Size(min=5, max = 250, message = "Trường này phải lớn hơn 5 và nhỏ hơn 250 ký tự")
     private String password;
 
     @Column(name = "enabled")
@@ -61,7 +61,7 @@ public class User {
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date modifiedDate;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.DETACH, CascadeType.REFRESH})
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.DETACH, CascadeType.REFRESH, CascadeType.PERSIST})
     @JoinTable(
             name = "user_role",
             joinColumns = @JoinColumn(
@@ -74,7 +74,7 @@ public class User {
     public User() {
     }
 
-    public User(@NotEmpty(message = "Trường này không được bỏ trống") @Size(min = 3, max = 50, message = "Trường này phải lớn hơn 4 và nhỏ hơn 50 ký tự") String username, @NotEmpty(message = "Trường này không được bỏ trống") @Size(max = 50, message = "Trường này phải nhỏ hơn 50 ký tự") String firstName, @NotEmpty(message = "Trường này không được bỏ trống") @Size(max = 50, message = "Trường này phải nhỏ hơn 50 ký tự") String lastName, @NotEmpty(message = "Trường này không được bỏ trống") @Size(min = 6, max = 50, message = "Trường này phải lớn hơn 6 và nhỏ hơn 50 ký tự") String email, @NotEmpty(message = "Trường này không được bỏ trống") @Size(min = 6, max = 50, message = "Trường này phải lớn hơn 6 và nhỏ hơn 50 ký tự") String password, boolean enabled) {
+    public User(@NotEmpty(message = "Trường này không được bỏ trống") @Size(min = 3, max = 50, message = "Trường này phải lớn hơn 4 và nhỏ hơn 50 ký tự") String username, @NotEmpty(message = "Trường này không được bỏ trống") @Size(max = 50, message = "Trường này phải nhỏ hơn 50 ký tự") String firstName, @NotEmpty(message = "Trường này không được bỏ trống") @Size(max = 50, message = "Trường này phải nhỏ hơn 50 ký tự") String lastName, @NotEmpty(message = "Trường này không được bỏ trống") @Size(min = 5, max = 50, message = "Trường này phải lớn hơn 5 và nhỏ hơn 50 ký tự") String email, @NotEmpty(message = "Trường này không được bỏ trống") @Size(min = 5, max = 50, message = "Trường này phải lớn hơn 5 và nhỏ hơn 50 ký tự") String password, boolean enabled) {
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -83,7 +83,7 @@ public class User {
         this.enabled = enabled;
     }
 
-    public User(@NotEmpty(message = "Trường này không được bỏ trống") @Size(min = 3, max = 50, message = "Trường này phải lớn hơn 4 và nhỏ hơn 50 ký tự") String username, @NotEmpty(message = "Trường này không được bỏ trống") @Size(max = 50, message = "Trường này phải nhỏ hơn 50 ký tự") String firstName, @NotEmpty(message = "Trường này không được bỏ trống") @Size(max = 50, message = "Trường này phải nhỏ hơn 50 ký tự") String lastName, @NotEmpty(message = "Trường này không được bỏ trống") @Size(min = 6, max = 50, message = "Trường này phải lớn hơn 6 và nhỏ hơn 50 ký tự") String email, @NotEmpty(message = "Trường này không được bỏ trống") @Size(min = 6, max = 50, message = "Trường này phải lớn hơn 6 và nhỏ hơn 50 ký tự") String password, boolean enabled, @NotEmpty(message = "Trường này không được bỏ trống") Collection<Role> roles) {
+    public User(@NotEmpty(message = "Trường này không được bỏ trống") @Size(min = 3, max = 50, message = "Trường này phải lớn hơn 4 và nhỏ hơn 50 ký tự") String username, @NotEmpty(message = "Trường này không được bỏ trống") @Size(max = 50, message = "Trường này phải nhỏ hơn 50 ký tự") String firstName, @NotEmpty(message = "Trường này không được bỏ trống") @Size(max = 50, message = "Trường này phải nhỏ hơn 50 ký tự") String lastName, @NotEmpty(message = "Trường này không được bỏ trống") @Size(min = 5, max = 50, message = "Trường này phải lớn hơn 5 và nhỏ hơn 50 ký tự") String email, @NotEmpty(message = "Trường này không được bỏ trống") @Size(min = 5, max = 50, message = "Trường này phải lớn hơn 5 và nhỏ hơn 50 ký tự") String password, boolean enabled, @NotEmpty(message = "Trường này không được bỏ trống") Collection<Role> roles) {
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
