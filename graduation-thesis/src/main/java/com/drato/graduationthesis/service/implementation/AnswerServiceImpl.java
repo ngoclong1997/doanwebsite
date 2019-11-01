@@ -6,6 +6,7 @@ import com.drato.graduationthesis.repository.AnswerRepository;
 import com.drato.graduationthesis.service.interfaces.AnswerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -39,5 +40,11 @@ public class AnswerServiceImpl implements AnswerService {
     @Override
     public void deleteByExamId(Long examId) {
         repository.deleteAllByExamId(examId);
+    }
+
+    @Override
+    public void insertAnswers(List<Answer> answers) {
+        repository.deleteAllByExamIdAndSubjectId(answers.get(0).getExamId(), answers.get(0).getSubjectId());
+        repository.saveAll(answers);
     }
 }

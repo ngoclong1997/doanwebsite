@@ -6,6 +6,7 @@ import com.drato.graduationthesis.repository.StudentRepository;
 import com.drato.graduationthesis.service.interfaces.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -34,5 +35,11 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public void deleteByExamId(Long examId) {
         repository.deleteAllByExamId(examId);
+    }
+
+    @Override
+    public void insertStudents(List<Student> lstStudents) {
+        repository.deleteAllByExamId(lstStudents.get(0).getExamId());
+        repository.saveAll(lstStudents);
     }
 }

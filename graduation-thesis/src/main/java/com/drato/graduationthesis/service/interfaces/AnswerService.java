@@ -16,4 +16,6 @@ public interface AnswerService {
 
     public void deleteByExamId(Long examId);
 
+    public void insertAnswers(List<Answer> answers);
+
 }

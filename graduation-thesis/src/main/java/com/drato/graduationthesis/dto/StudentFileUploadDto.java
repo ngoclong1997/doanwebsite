@@ -5,13 +5,21 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-public class AnswerFileUploadDto {
+public class StudentFileUploadDto {
     @NotEmpty(message = "Trường này không được bỏ trống")
     private String examId;
-    @NotEmpty(message = "Trường này không được bỏ trống")
-    private String subjectId;
+    @NotNull(message = "Trường này không được bỏ trống")
+    Boolean hasHeader;
     @NotNull(message = "Trường này không được bỏ trống")
     private MultipartFile file;
+
+    public Boolean getHasHeader() {
+        return hasHeader;
+    }
+
+    public void setHasHeader(Boolean hasHeader) {
+        this.hasHeader = hasHeader;
+    }
 
     public String getExamId() {
         return examId;
@@ -21,14 +29,6 @@ public class AnswerFileUploadDto {
         this.examId = examId;
     }
 
-    public String getSubjectId() {
-        return subjectId;
-    }
-
-    public void setSubjectId(String subjectId) {
-        this.subjectId = subjectId;
-    }
-
     public MultipartFile getFile() {
         return file;
     }
@@ -36,5 +36,4 @@ public class AnswerFileUploadDto {
     public void setFile(MultipartFile file) {
         this.file = file;
     }
-
 }

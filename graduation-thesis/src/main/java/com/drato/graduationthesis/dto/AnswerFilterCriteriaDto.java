@@ -5,7 +5,7 @@ import com.drato.graduationthesis.model.Subject;
 
 import javax.validation.constraints.NotEmpty;
 
-public class ExamSubjectDto {
+public class AnswerFilterCriteriaDto {
     @NotEmpty(message = "Trường này không được bỏ trống")
     String examId;
     @NotEmpty(message = "Trường này không được bỏ trống")

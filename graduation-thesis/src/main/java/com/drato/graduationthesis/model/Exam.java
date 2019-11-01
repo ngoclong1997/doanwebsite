@@ -30,7 +30,6 @@ public class Exam implements Serializable {
                     name = "exam_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(
                     name = "subject_id", referencedColumnName = "id"))
-    @NotEmpty(message = "Trường này không được bỏ trống")
     private Collection<Subject> subjects;
 
     @Temporal(TemporalType.TIMESTAMP)

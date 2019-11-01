@@ -24,8 +24,11 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
+                    <div th:if="${!#strings.isEmpty(message)}">
+                        <div class="alert alert-info col-6"><span th:text="${message}"></span></div>
+                    </div>
                     <label>Chọn kỳ thi và môn thi để xem đáp án</label>
-                    <form th:action="@{/manager/answer}" th:object="${examSubjectDto}" method="post">
+                    <form th:action="@{/manager/answer}" th:object="${answerFilterCriteriaDto}" method="get">
                         <div class="row">
                             <div class="col-md-5">
                                 <div class="form-group">
@@ -46,30 +49,28 @@
                                 </div>
                             </div>
                             <div class="col-md-2">
-                                <input type="submit" class="btn btn-success" value="Lấy danh sách đáp án"/>
+                                <input type="submit" class="btn btn-success" value="Xem danh sách đáp án"/>
                             </div>
                         </div>
                     </form>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
-                    <div th:if="${!#strings.isEmpty(message)}">
-                        <div class="alert alert-info col-6"><span th:text="${message}"></span></div>
-                    </div>
 
                     <table id="my-data-table" class="table table-bordered table-striped display">
                         <thead>
                         <tr class="text-center">
                             <th >Mã đề</th>
                             <th>Đáp án</th>
+                            <th>Số lượng câu hỏi</th>
                             <th>Action</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr th:each="answer, state : ${answers}">
-
                             <td class="text-center" th:utext="${answer.testCode}"></td>
                             <td th:utext="${answer.answers}"></td>
+                            <td class="text-center" th:utext="${#strings.length(answer.answers) + ' câu'}"></td>
                             <td class="text-center">
                                 <a th:href="@{/manager/answer/edit(id=${answer.id})}" class="btn btn-primary"><i class="fas fa-eye"></i></a>
                             </td>
@@ -134,8 +135,9 @@
             "autoWidth": true,
             "columnDefs": [
                 { "width": "10%", "targets": 0 },
-                { "width": "80%", "targets": 1 },
-                { "width": "10%", "targets": 1 }
+                { "width": "65%", "targets": 1 },
+                { "width": "15%", "targets": 2 },
+                { "width": "10%", "targets": 3 }
             ],
         });
     </script>

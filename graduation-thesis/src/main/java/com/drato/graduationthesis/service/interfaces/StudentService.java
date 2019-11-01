@@ -9,4 +9,6 @@ public interface StudentService {
     public List<Student> getAllByExamId(Long examId);
     public Student getById(Long id);
     public void deleteByExamId(Long examId);
+
+    void insertStudents(List<Student> lstStudents);
 }

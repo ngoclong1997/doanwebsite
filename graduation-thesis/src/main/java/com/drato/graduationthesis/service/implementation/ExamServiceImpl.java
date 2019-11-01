@@ -97,7 +97,11 @@ public class ExamServiceImpl implements ExamService {
         exam.setName(examDto.getName());
         exam.setDescription(examDto.getDescription());
         exam.setStartDate(new SimpleDateFormat("dd/MM/yyyy").parse(examDto.getStartDate()));
-        exam.setSubjects(examDto.getSubjects());
+        Collection<Subject> subjects = examDto.getSubjects();
+        if (subjects == null) {
+            subjects = new ArrayList<>();
+        }
+        exam.setSubjects(subjects);
         return exam;
     }
 }

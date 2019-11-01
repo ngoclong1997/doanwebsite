@@ -23,10 +23,8 @@ public class Student implements Serializable {
     @Column(name = "lastname")
     private String lastName;
 
-    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "dob")
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date dob;
+    private String dob;
 
     @Column(name = "gender")
     private String gender;
@@ -74,11 +72,19 @@ public class Student implements Serializable {
         this.lastName = lastName;
     }
 
-    public Date getDob() {
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getDob() {
         return dob;
     }
 
-    public void setDob(Date dob) {
+    public void setDob(String dob) {
         this.dob = dob;
     }
 
