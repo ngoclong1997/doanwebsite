@@ -57,7 +57,7 @@
                         <div class="alert alert-info col-6"><span th:text="${message}"></span></div>
                     </div>
 
-                    <table id="dt-user" class="table table-bordered table-striped display">
+                    <table id="my-data-table" class="table table-bordered table-striped display">
                         <thead>
                         <tr class="text-center">
                             <th >Mã đề</th>
@@ -73,7 +73,6 @@
                             <td class="text-center">
                                 <a th:href="@{/manager/answer/edit(id=${answer.id})}" class="btn btn-primary"><i class="fas fa-eye"></i></a>
                             </td>
-
                         </tr>
                         </tbody>
                     </table>
@@ -113,7 +112,7 @@
                 }
             });
         }
-        $('#dt-user').DataTable({
+        $('#my-data-table').DataTable({
             "lengthMenu":[
                 [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]
             ],

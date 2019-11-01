@@ -1,5 +1,6 @@
 package com.drato.graduationthesis.controller.manager;
 
+import com.drato.graduationthesis.dto.AnswerFileUploadDto;
 import com.drato.graduationthesis.dto.ExamSubjectDto;
 import com.drato.graduationthesis.model.Answer;
 import com.drato.graduationthesis.model.Exam;
@@ -64,5 +65,19 @@ public class AnswerController {
         } catch (Exception e) {
             return ResponseEntity.ok(new ArrayList<Subject>());
         }
+    }
+
+    @GetMapping("/answer/importAnswer")
+    public String importAnswer(Model model) {
+        model.addAttribute("exams", examService.getAll());
+        model.addAttribute("subjects", new ArrayList<Subject>());
+        model.addAttribute("fileAnswer", new AnswerFileUploadDto());
+        model.addAttribute("title", "Nhập đáp án");
+        return "manager/answer/add-answer";
+    }
+
+    @PostMapping("/answer/importAnswer")
+    public String handleImportAnswer(@ModelAttribute("fileAnswer") AnswerFileUploadDto answerFileUploadDto, @RequestParam Model model) {
+        return "redirect:/manager/answer";
     }
 }
