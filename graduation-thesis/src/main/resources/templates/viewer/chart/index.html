@@ -1,24 +1,94 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
 <html layout:decorate="~{main-layout}" xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Người xem</title>
+    <title><span th:text="${title}"></span></title>
 </head>
 <body>
 
 <div layout:fragment="header">
     <div class="col-sm-6">
-        <h1>Người xem</h1>
+        <h1><span th:text="${title}"></span></h1>
     </div>
     <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a th:href="@{/}">Trang chủ</a></li>
-            <li class="breadcrumb-item">Người xem</li>
+            <li class="breadcrumb-item"><a th:href="@{/admin}">Người xem</a></li>
+            <li class="breadcrumb-item"><span th:text="${title}"></span></li>
         </ol>
     </div>
 </div>
 
 <div layout:fragment="content">
-    <h1>Chào mừng bạn đến với hệ thống</h1>
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div th:if="${!#strings.isEmpty(message)}">
+                        <div class="alert alert-info col-6"><span th:text="${message}"></span></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-offset-2"></div>
+                        <div class="col-md-8">
+                            <canvas id="myChart"></canvas>
+                        </div>
+
+                    </div>
+
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
+        <!-- /.col -->
+    </div>
 </div>
+
+<div layout:fragment="additionjs">
+    <script>
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: getListPoints(),
+                datasets: [{
+                    data: getListRandomInteger(41, 200, 900),
+                    backgroundColor: getListDefaultColor(41)
+                }],
+
+            },
+            options: {
+                legend: { display: false },
+                scales: {
+                    yAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: "Số lượng"
+                        },
+                        ticks: {
+                            beginAtZero: true,
+                        }
+                    }],
+                    xAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: "Điểm"
+                        },
+                        ticks: {
+                            autoSkip: false,
+                            maxRotation: 90,
+                            minRotation: 90
+                        }
+                    }]
+                },
+                title: {
+                    display: true,
+                    text: 'Biểu đồ phổ điểm'
+                }
+            }
+        });
+
+    </script>
+</div>
+
 </body>
 </html>

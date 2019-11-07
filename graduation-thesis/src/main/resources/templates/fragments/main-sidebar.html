@@ -131,30 +131,6 @@
                             </li>
                         </ul>
                     </li>
-                    <li id="root-notification" class="nav-item has-treeview">
-                        <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-copy"></i>
-                            <p>
-                                Thông báo
-                                <i class="fas fa-angle-left right"></i>
-                                <!--<span class="badge badge-info right">6</span>-->
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a id="notif-1" th:href="@{/manager/notification}" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Bài thi bị chỉnh sửa nhiều</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a id="notif-2" th:href="@{/manager/notification}" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Thông báo từ người chấm</p>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
                 </div>
 
                 <div class="wrapper" sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_VIEWER', 'ROLE_MANAGER')">
