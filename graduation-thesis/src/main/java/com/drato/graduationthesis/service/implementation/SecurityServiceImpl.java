@@ -32,13 +32,21 @@ public class SecurityServiceImpl implements SecurityService {
 
     @Override
     public String getCurrentUsername() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        return authentication.getName();
+        try {
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            return authentication.getName();
+        } catch (Exception e) {
+            return "";
+        }
     }
 
     @Override
     public boolean currentUserIsAdmin() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        return authentication.getAuthorities().stream().anyMatch(r -> r.getAuthority().equals(PropertiesUtils.getProperty(PropertiesUtils.ROLE_ADMIN, "")));
+        try {
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            return authentication.getAuthorities().stream().anyMatch(r -> r.getAuthority().equals(PropertiesUtils.getProperty(PropertiesUtils.ROLE_ADMIN, "")));
+        } catch (Exception e ) {
+            return false;
+        }
     }
 }

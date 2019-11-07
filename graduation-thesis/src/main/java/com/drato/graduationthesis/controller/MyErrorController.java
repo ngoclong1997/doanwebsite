@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class MyErrorController implements ErrorController {
 
-    @GetMapping(value = "/error")
+    @GetMapping(value = "/error1")
     public String renderErrorPage(HttpServletRequest httpRequest, Model model) {
 
         String code = "", message = "", messageDetail = "";

@@ -10,7 +10,9 @@ public interface SubjectService {
     public Subject getById(Long id);
     public Collection<Subject> getSubjectsByIds(Long[] ids);
 
+
     boolean nameUsedByOther(Long id, String name);
+
     boolean nameExisted(String name);
 
     void createSubject(Subject subject);

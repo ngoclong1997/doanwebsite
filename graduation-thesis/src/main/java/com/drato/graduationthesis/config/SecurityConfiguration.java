@@ -60,7 +60,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         if (!userService.usernameExisted("admin")) {
-            UserDto regUser = new UserDto("admin", "Bob", "Nguyen", "admin", "admin", "bob@drato.com", "ROLE_ADMIN");
+            UserDto regUser = new UserDto("admin", "Admin", "User", "admin", "admin", "admin@drato.com", "ROLE_ADMIN");
             userService.createUser(regUser);
         }
     }

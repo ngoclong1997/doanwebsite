@@ -18,7 +18,6 @@ public class ExamDto {
     @Size(max = 512, message = "Trường này không được dài quá 512 ký tự")
     private String name;
 
-    @NotEmpty(message = "Trường này không được bỏ trống")
     private List<Subject> subjects;
 
     @NotEmpty(message = "Trường này không được bỏ trống")

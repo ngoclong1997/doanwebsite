@@ -25,6 +25,9 @@ public class Grade implements Serializable {
     @Column(name = "point")
     private float point;
 
+    @Column(name = "status")
+    private int status;
+
     @Column(name = "added_by")
     private String addBy;
 
@@ -40,6 +43,14 @@ public class Grade implements Serializable {
     @Column(name = "modified_at")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date modifiedDate;
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
 
     public Long getExamId() {
         return examId;
