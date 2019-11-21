@@ -65,7 +65,7 @@ public class AnswerController {
         model.addAttribute("subjects", subjects);
         model.addAttribute("exams", exams);
         model.addAttribute("answerFilterCriteriaDto", answerFilterCriteriaDto);
-        model.addAttribute("title", "Danh sách đáp án");
+        model.addAttribute("title", "lang.list-answer");
         return "manager/answer/index";
     }
 
@@ -84,7 +84,7 @@ public class AnswerController {
         model.addAttribute("exams", examService.getAll());
         model.addAttribute("subjects", new ArrayList<Subject>());
         model.addAttribute("fileAnswer", new AnswerFileUploadDto());
-        model.addAttribute("title", "Nhập đáp án");
+        model.addAttribute("title", "lang.import-answer");
         return "manager/answer/add-answer";
     }
 
@@ -99,7 +99,7 @@ public class AnswerController {
             result.rejectValue("file", null, "Trường này không được bỏ trống");
         }
         if (result.hasErrors()) {
-            model.addAttribute("title", "Nhập đáp án");
+            model.addAttribute("title", "lang.import-answer");
             return "manager/answer/add-answer";
         }
         try {

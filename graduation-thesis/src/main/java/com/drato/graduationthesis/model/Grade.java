@@ -11,13 +11,16 @@ import java.util.Date;
 @IdClass(GradeId.class)
 public class Grade implements Serializable {
 
+    public static final int ANSWER_SHEET_VALID = 1;
+    public static final int ANSWER_SHEET_INVALID = 2;
+
     @Id
     @Column(name = "student_id")
-    private String studentId;
+    private Long studentId;
 
     @Id
     @Column(name = "subject_id")
-    private String subjectId;
+    private Long subjectId;
 
     @Column(name = "exam_id")
     private Long examId;
@@ -60,19 +63,23 @@ public class Grade implements Serializable {
         this.examId = examId;
     }
 
-    public String getStudentId() {
+    public Long getStudentId() {
         return studentId;
     }
 
-    public void setStudentId(String studentId) {
+    public void setStudentId(Long studentId) {
         this.studentId = studentId;
     }
 
-    public String getSubjectId() {
+    public void setSubjectId(Long subjectId) {
+        this.subjectId = subjectId;
+    }
+
+    public Long getSubjectId() {
         return subjectId;
     }
 
-    public void setSubjectId(String subjectId) {
+    public void setSubjectId(long subjectId) {
         this.subjectId = subjectId;
     }
 

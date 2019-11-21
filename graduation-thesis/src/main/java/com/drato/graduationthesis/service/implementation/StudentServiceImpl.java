@@ -38,6 +38,11 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
+    public int countStudentInExam(long examId) {
+        return repository.countAllByExamId(examId);
+    }
+
+    @Override
     public void insertStudents(List<Student> lstStudents) {
         repository.deleteAllByExamId(lstStudents.get(0).getExamId());
         repository.saveAll(lstStudents);

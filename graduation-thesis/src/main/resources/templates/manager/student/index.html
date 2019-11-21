@@ -1,19 +1,19 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
 <html layout:decorate="~{main-layout}" xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title><span th:text="${title}"></span></title>
+    <title th:text="#{${title}}"></title>
 </head>
 <body>
 
 <div layout:fragment="header">
     <div class="col-sm-6">
-        <h1><span th:text="${title}"></span></h1>
+        <h1><span th:text="#{${title}}"></span></h1>
     </div>
     <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a th:href="@{/}">Trang chủ</a></li>
-            <li class="breadcrumb-item"><a th:href="@{/admin}">Người quản lý</a></li>
-            <li class="breadcrumb-item"><span th:text="${title}"></span></li>
+            <li class="breadcrumb-item"><a th:href="@{/}"><span th:text="#{lang.home-page}"></span></a></li>
+            <li class="breadcrumb-item"><a th:href="@{/admin}"><span th:text="#{lang.manager}"></span></a></li>
+            <li class="breadcrumb-item"><span th:text="#{${title}}"></span></li>
         </ol>
     </div>
 </div>
@@ -27,20 +27,20 @@
                     <div th:if="${!#strings.isEmpty(message)}">
                         <div class="alert alert-info col-6"><span th:text="${message}"></span></div>
                     </div>
-                    <label>Chọn kỳ thi để xem danh sách sinh viên</label>
+                    <label><span th:text="#{lang.choose-exam-1}"></span></label>
                     <form th:action="@{/manager/student}" th:object="${studentFilter}" method="get">
                         <div class="row">
                             <div class="col-md-5">
                                 <div class="form-group">
                                     <select id="slc-exam" th:field="*{examId}" th:classappend="${#fields.hasErrors('examId')}? 'is-invalid':''" class="form-control select2" style="width: 100%;">
-                                        <option value="">---Chọn kỳ thi---</option>
+                                        <option value=""><span th:text="#{lang.choose-exam}"></span></option>
                                         <option th:each="exam, state : ${exams}" th:value="${exam.id}" th:text="${exam.name}"></option>
                                     </select>
                                     <div class="invalid-feedback" th:each="error: ${#fields.errors('examId')}" th:text="${error}"></div>
                                 </div>
                             </div>
                             <div class="col-md-2">
-                                <input type="submit" class="btn btn-success" value="Xem danh sách sinh viên"/>
+                                <input type="submit" class="btn btn-success" th:value="#{lang.view-students}"/>
                             </div>
                         </div>
                     </form>
@@ -51,11 +51,11 @@
                     <table id="my-data-table" class="table table-bordered table-striped display">
                         <thead>
                         <tr class="text-center">
-                            <th>Số báo danh</th>
-                            <th>Họ đệm</th>
-                            <th>Tên</th>
-                            <th>Ngày sinh</th>
-                            <th>Giới tính</th>
+                            <th><span th:text="#{lang.student-id}"></span></th>
+                            <th><span th:text="#{lang.lastname}"></span></th>
+                            <th><span th:text="#{lang.firstname}"></span></th>
+                            <th><span th:text="#{lang.dob}"></span></th>
+                            <th><span th:text="#{lang.gender}"></span></th>
                         </tr>
                         </thead>
                         <tbody>

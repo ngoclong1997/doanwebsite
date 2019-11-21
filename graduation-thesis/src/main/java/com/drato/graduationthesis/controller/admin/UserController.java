@@ -21,14 +21,14 @@ public class UserController {
 
     @GetMapping("/user")
     public String index(Model model) {
-        model.addAttribute("title", "Danh sách người dùng");
+        model.addAttribute("title", "lang.list-account");
         model.addAttribute("users", userService.getAllUser());
         return "admin/user/index";
     }
 
     @GetMapping("/user/add")
     public String addUser(Model model) {
-        model.addAttribute("title", "Thêm người dùng");
+        model.addAttribute("title", "lang.add-account");
         model.addAttribute("user", new UserDto());
         return "admin/user/add-user";
     }

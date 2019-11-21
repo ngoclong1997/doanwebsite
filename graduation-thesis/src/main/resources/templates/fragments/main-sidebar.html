@@ -2,9 +2,9 @@
        xmlns:sec="http://www.springframework.org/security/tags">
     <!-- Brand Logo -->
     <a th:href="@{/}" class="brand-link">
-        <img th:src="@{/dist/img/AdminLTELogo.png}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-             style="opacity: .8">
-        <span class="brand-text font-weight-light">Quản lý chấm thi</span>
+<!--        <img th:src="@{/dist/img/logo.png}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"-->
+<!--             style="opacity: .8">-->
+        <span class="brand-text font-weight-light"><span th:text="#{lang.website-name}"></span></span>
     </a>
 
     <!-- Sidebar -->
@@ -12,7 +12,7 @@
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
-                <img th:src="@{/dist/img/user2-160x160.jpg}" class="img-circle elevation-2" alt="User Image">
+                <img th:src="@{/dist/img/user.png}" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
                 <a href="#" class="d-block"><span th:text ="${#strings.toUpperCase(#authentication.getPrincipal().getUsername())}"></span></a>
@@ -28,18 +28,18 @@
                     <a id="home" th:href="@{/}" class="nav-link">
                         <i class="nav-icon fas fa-home"></i>
                         <p>
-                            Trang chủ
+                            <span th:text="#{lang.home-page}"></span>
                         </p>
                     </a>
                 </li>
 
                 <div class="wrapper" sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')">
-                    <li class="nav-header">QUẢN LÝ CHẤM THI</li>
+                    <li class="nav-header"><span th:text="#{lang.exam-info}"></span></li>
                     <li id="root-exam-mgmt" class="nav-item has-treeview">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-copy"></i>
                             <p>
-                                Quản lý kỳ thi
+                                <span th:text="#{lang.exam-mgmt}"></span>
                                 <i class="fas fa-angle-left right"></i>
                                 <!--<span class="badge badge-info right">6</span>-->
                             </p>
@@ -48,13 +48,22 @@
                             <li class="nav-item">
                                 <a id="list-exam" th:href="@{/manager/exam}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>Danh sách kỳ thi</p>
+                                    <p><span th:text="#{lang.list-exam}"></span></p>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a id="add-exam" th:href="@{/manager/exam/add}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>Thêm kỳ thi</p>
+                                    <p><span th:text="#{lang.add-exam}"></span></p>
+                                </a>
+                            </li>
+
+                        </ul>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a id="manual-edit-report" th:href="@{/manager/manual-edit-report}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p><span th:text="#{lang.manual-edit-report}"></span></p>
                                 </a>
                             </li>
                         </ul>
@@ -63,7 +72,7 @@
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-copy"></i>
                             <p>
-                                Quản lý môn thi
+                                <span th:text="#{lang.subject-mgmt}"></span>
                                 <i class="fas fa-angle-left right"></i>
                                 <!--<span class="badge badge-info right">6</span>-->
                             </p>
@@ -72,13 +81,13 @@
                             <li class="nav-item">
                                 <a id="list-subject" th:href="@{/manager/subject}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>Danh sách môn thi</p>
+                                    <p><span th:text="#{lang.list-subject}"></span></p>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a id="add-subject" th:href="@{/manager/subject/add}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>Thêm môn thi</p>
+                                    <p><span th:text="#{lang.add-subject}"></span></p>
                                 </a>
                             </li>
                         </ul>
@@ -87,7 +96,7 @@
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-copy"></i>
                             <p>
-                                Quản lý đáp án
+                                <span th:text="#{lang.answer-mgmt}"></span>
                                 <i class="fas fa-angle-left right"></i>
                                 <!--<span class="badge badge-info right">6</span>-->
                             </p>
@@ -96,13 +105,13 @@
                             <li class="nav-item">
                                 <a id="list-answer" th:href="@{/manager/answer}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>Danh sách đáp án</p>
+                                    <p><span th:text="#{lang.list-answer}"></span></p>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a id="import-answer" th:href="@{/manager/answer/importAnswer}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>Nhập file đáp án</p>
+                                    <p><span th:text="#{lang.import-answer}"></span></p>
                                 </a>
                             </li>
                         </ul>
@@ -111,7 +120,7 @@
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-copy"></i>
                             <p>
-                                Quản lý sinh viên
+                                <span th:text="#{lang.student-mgmt}"></span>
                                 <i class="fas fa-angle-left right"></i>
                                 <!--<span class="badge badge-info right">6</span>-->
                             </p>
@@ -120,26 +129,28 @@
                             <li class="nav-item">
                                 <a id="list-student" th:href="@{/manager/student}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>Danh sách sinh viên</p>
+                                    <p><span th:text="#{lang.list-student}"></span></p>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a id="import-student" th:href="@{/manager/student/importStudent}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>Nhập danh sách sinh viên</p>
+                                    <p><span th:text="#{lang.import-student}"></span></p>
                                 </a>
                             </li>
                         </ul>
+
                     </li>
+
                 </div>
 
                 <div class="wrapper" sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_VIEWER', 'ROLE_MANAGER')">
-                    <li class="nav-header">THỐNG KÊ KẾT QUẢ</li>
+                    <li class="nav-header"><span th:text="#{lang.result-statistic}"></span></li>
                     <li id="root-statistic-mgmt" class="nav-item has-treeview">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-copy"></i>
                         <p>
-                            Thống kê
+                            <span th:text="#{lang.statistic}"></span>
                             <i class="fas fa-angle-left right"></i>
                             <!--<span class="badge badge-info right">6</span>-->
                         </p>
@@ -148,21 +159,22 @@
                         <li class="nav-item">
                             <a id="chart" th:href="@{/viewer}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Biểu đồ</p>
+                                <p><span th:text="#{lang.chart}"></span></p>
                             </a>
                         </li>
                     </ul>
+
                 </li>
                 </div>
 
 
                 <div class="wrapper" sec:authorize="hasRole('ROLE_ADMIN')">
-                    <li class="nav-header">QUẢN TRỊ VIÊN</li>
+                    <li class="nav-header"><span th:text="#{lang.administration}"></span></li>
                     <li id="root-account-mgmt" class="nav-item has-treeview">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-copy"></i>
                             <p>
-                                Quản lý tài khoản
+                                <span th:text="#{lang.account-mgmt}"></span>
                                 <i class="fas fa-angle-left right"></i>
                                 <!--<span class="badge badge-info right">6</span>-->
                             </p>
@@ -171,13 +183,13 @@
                             <li class="nav-item">
                                 <a id="list-account" th:href="@{/admin/user}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>Danh sách tài khoản</p>
+                                    <p><span th:text="#{lang.list-account}"></span></p>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a  id="add-account"  th:href="@{/admin/user/add}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>Thêm tài khoản</p>
+                                    <p><span th:text="#{lang.add-account}"></span></p>
                                 </a>
                             </li>
                         </ul>
@@ -186,7 +198,7 @@
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-copy"></i>
                             <p>
-                                Quản lý quyền
+                                <span th:text="#{lang.role-mgmt}"></span>
                                 <i class="fas fa-angle-left right"></i>
                                 <!--<span class="badge badge-info right">6</span>-->
                             </p>
@@ -195,7 +207,7 @@
                             <li class="nav-item">
                                 <a id="list-role"  th:href="@{/admin/role}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>Danh sách quyền</p>
+                                    <p><span th:text="#{lang.list-role}"></span></p>
                                 </a>
                             </li>
                         </ul>

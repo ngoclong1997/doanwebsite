@@ -1,19 +1,19 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
 <html layout:decorate="~{main-layout}" xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title><span th:text="${title}"></span></title>
+    <title th:text="#{${title}}"></title>
 </head>
 <body>
 
 <div layout:fragment="header">
     <div class="col-sm-6">
-        <h1><span th:text="${title}"></span></h1>
+        <h1><span th:text="#{${title}}"></span></h1>
     </div>
     <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a th:href="@{/}">Trang chủ</a></li>
-            <li class="breadcrumb-item"><a th:href="@{/admin}">Người quản lý</a></li>
-            <li class="breadcrumb-item"><span th:text="${title}"></span></li>
+            <li class="breadcrumb-item"><a th:href="@{/}"><span th:text="#{lang.home-page}"></span></a></li>
+            <li class="breadcrumb-item"><a th:href="@{/admin}"><span th:text="#{lang.manager}"></span></a></li>
+            <li class="breadcrumb-item"><span th:text="#{${title}}"></span></li>
         </ol>
     </div>
 </div>
@@ -35,8 +35,8 @@
 
                         <div class="form-row">
                             <div class="form-group col-8">
-                                <label for="subject-name" class="control-label" th:classappend="${#fields.hasErrors('name')}? 'text-danger':''">Tên môn thi</label>
-                                <input id="subject-name" class="form-control" th:classappend="${#fields.hasErrors('name')}? 'is-invalid':''" th:field="*{name}" placeholder="Toán, Vật lý, Hóa học,..."/>
+                                <label for="subject-name" class="control-label" th:classappend="${#fields.hasErrors('name')}? 'text-danger':''"><span th:text="#{lang.subject-name}"></span></label>
+                                <input id="subject-name" class="form-control" th:classappend="${#fields.hasErrors('name')}? 'is-invalid':''" th:field="*{name}" th:placeholder="#{lang.subject-name-placeholder}"/>
                                 <div class="invalid-feedback" th:each="error: ${#fields.errors('name')}" th:text="${error}">
                                 </div>
                             </div>
@@ -47,10 +47,10 @@
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-1">
-                                    <input type="submit" name="add-subject-submit" id="add-subject-submit" class="form-control btn btn-success" value="Hoàn tất" />
+                                    <input type="submit" name="add-subject-submit" id="add-subject-submit" class="form-control btn btn-success" th:value="#{lang.done}" />
                                 </div>
                                 <div class="col-1">
-                                    <a th:href="@{/manager/subject}" id="add-subject-reset" class="form-control btn btn-default">Hủy bỏ</a>
+                                    <a th:href="@{/manager/subject}" id="add-subject-reset" class="form-control btn btn-default"><span th:text="#{lang.cancel}"></span></a>
                                 </div>
                             </div>
                         </div>

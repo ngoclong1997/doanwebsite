@@ -1,19 +1,19 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
 <html layout:decorate="~{main-layout}" xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title><span th:text="${title}"></span></title>
+    <title th:text="#{${title}}"></title>
 </head>
 <body>
 
 <div layout:fragment="header">
     <div class="col-sm-6">
-        <h1><span th:text="${title}"></span></h1>
+        <h1><span th:text="#{${title}}"></span></h1>
     </div>
     <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a th:href="@{/}">Trang chủ</a></li>
-            <li class="breadcrumb-item"><a th:href="@{/admin}">Người quản lý</a></li>
-            <li class="breadcrumb-item"><span th:text="${title}"></span></li>
+            <li class="breadcrumb-item"><a th:href="@{/}"><span th:text="#{lang.home-page}"></span></a></li>
+            <li class="breadcrumb-item"><a th:href="@{/admin}"><span th:text="#{lang.manager}"></span></a></li>
+            <li class="breadcrumb-item"><span th:text="#{${title}}"></span></li>
         </ol>
     </div>
 </div>
@@ -32,9 +32,9 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="slc-exam">Chọn kỳ thi</label>
+                                    <label for="slc-exam"><span th:text="#{lang.choose-exam-1}"></span></label>
                                     <select id="slc-exam" th:field="*{examId}" th:classappend="${#fields.hasErrors('examId')}? 'is-invalid':''" class="form-control select2" style="width: 100%;">
-                                        <option value="">---Chọn kỳ thi---</option>
+                                        <option value=""><span th:text="#{lang.choose-exam}"></span></option>
                                         <option th:each="exam, state : ${exams}" th:value="${exam.id}" th:text="${exam.name}"></option>
                                     </select>
                                     <div class="invalid-feedback" th:each="error: ${#fields.errors('examId')}" th:text="${error}"></div>
@@ -48,7 +48,7 @@
                                 <div class="input-group">
                                     <div class="custom-file">
                                         <input accept=".xls,.xlsx" type="file" th:classappend="${#fields.hasErrors('file')}? 'is-invalid':''" th:field="*{file}" class="custom-file-input" th:text="Upload" id="exampleInputFile">
-                                        <label class="custom-file-label" th:classappend="${#fields.hasErrors('file')}? 'text-danger':''" for="exampleInputFile">Chọn file</label>
+                                        <label class="custom-file-label" th:classappend="${#fields.hasErrors('file')}? 'text-danger':''" for="exampleInputFile"><span th:text="#{lang.choose-file}"></span></label>
                                         <div class="invalid-feedback" th:each="error: ${#fields.errors('file')}" th:text="${error}"></div>
                                     </div>
                                 </div>
@@ -59,7 +59,7 @@
                             <div class="col-6">
                                 <div class="icheck-primary pl-1" style="width: 250px">
                                     <input id="has-header" type="checkbox" th:field="*{hasHeader}" value="true">
-                                    <label for="has-header">File có chứa tiêu đề</label>
+                                    <label for="has-header"><span th:text="#{lang.file-contain-header}"></span></label>
                                 </div>
                             </div>
                         </div>
@@ -67,7 +67,7 @@
                     <!-- /.card-body -->
 
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-primary">Nhập sinh viên</button>
+                        <button type="submit" class="btn btn-primary"><span th:text="#{lang.import-student}"></span></button>
                     </div>
                 </form>
             </div>

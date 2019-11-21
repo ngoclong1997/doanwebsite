@@ -1,19 +1,19 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
 <html layout:decorate="~{main-layout}" xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title><span th:text="${title}"></span></title>
+    <title th:text="#{${title}}"></title>
 </head>
 <body>
 
 <div layout:fragment="header">
     <div class="col-sm-6">
-        <h1><span th:text="${title}"></span></h1>
+        <h1><span th:text="#{${title}}"></span></h1>
     </div>
     <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a th:href="@{/}">Trang chủ</a></li>
-            <li class="breadcrumb-item"><a th:href="@{/admin}">Quản trị viên</a></li>
-            <li class="breadcrumb-item"><span th:text="${title}"></span></li>
+            <li class="breadcrumb-item"><a th:href="@{/}"><span th:text="#{lang.home-page}"></span></a></li>
+            <li class="breadcrumb-item"><a th:href="@{/admin}"><span th:text="#{lang.administration}"></span></a></li>
+            <li class="breadcrumb-item"><span th:text="#{${title}}"></span></li>
         </ol>
     </div>
 </div>
@@ -24,22 +24,24 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    Xác nhận xóa
+                    <span th:text="#{lang.delete-confirm}"></span>
                 </div>
                 <div class="modal-body">
-                    Bạn có chắc muốn xóa người dùng này?
+                    <span th:text="#{lang.delete-user-confirm-text}"></span>
                 </div>
                 <ul>
                     <li>
-                        Tất cả các quyền của người dùng này cũng sẽ bị loại bỏ
+                        <span th:text="#{lang.delete-user-notice-1}"></span>
+
                     </li>
                     <li class="text-danger">
-                        Bạn sẽ không thể khôi phục lại dữ liệu đã xóa
+                        <span th:text="#{lang.delete-user-notice-2}"></span>
+
                     </li>
                 </ul>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Hủy bỏ</button>
-                    <a class="btn btn-danger btn-ok">Xác nhận</a>
+                    <button type="button" class="btn btn-default" data-dismiss="modal"><span th:text="#{lang.cancel}"></span></button>
+                    <a class="btn btn-danger btn-ok"><span th:text="#{lang.done}"></span></a>
                 </div>
             </div>
         </div>
@@ -48,7 +50,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <a th:href="@{/admin/user/add}" class="btn btn-success">Thêm người dùng</a>
+                    <a th:href="@{/admin/user/add}" class="btn btn-success"><span th:text="#{lang.add-account}"></span></a>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
@@ -59,12 +61,12 @@
                         <thead>
                         <tr class="text-center">
                             <th>Id</th>
-                            <th>Tên đăng nhập</th>
-                            <th>Họ đệm</th>
-                            <th>Tên</th>
-                            <th>Email</th>
-                            <th>Role</th>
-                            <th>Action</th>
+                            <th><span th:text="#{lang.username}"></span></th>
+                            <th><span th:text="#{lang.lastname}"></span></th>
+                            <th><span th:text="#{lang.firstname}"></span></th>
+                            <th><span th:text="#{lang.email}"></span></th>
+                            <th><span th:text="#{lang.role}"></span></th>
+                            <th><span th:text="#{lang.action}"></span></th>
                         </tr>
                         </thead>
                         <tbody>

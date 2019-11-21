@@ -1,19 +1,19 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
 <html layout:decorate="~{main-layout}" xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title><span th:text="${title}"></span></title>
+    <title th:text="#{${title}}"></title>
 </head>
 <body>
 
 <div layout:fragment="header">
     <div class="col-sm-6">
-        <h1><span th:text="${title}"></span></h1>
+        <h1><span th:text="#{${title}}"></span></h1>
     </div>
     <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a th:href="@{/}">Trang chủ</a></li>
-            <li class="breadcrumb-item"><a th:href="@{/admin}">Người quản lý</a></li>
-            <li class="breadcrumb-item"><span th:text="${title}"></span></li>
+            <li class="breadcrumb-item"><a th:href="@{/}"><span th:text="#{lang.home-page}"></span></a></li>
+            <li class="breadcrumb-item"><a th:href="@{/admin}"><span th:text="#{lang.manager}"></span></a></li>
+            <li class="breadcrumb-item"><span th:text="#{${title}}"></span></li>
         </ol>
     </div>
 </div>
@@ -24,23 +24,25 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    Xác nhận xóa
+                    <span th:text="#{lang.delete-confirm}"></span>
                 </div>
                 <div class="modal-body">
-                    Bạn có chắc muốn xóa môn thi này?
+                    <span th:text="#{lang.delete-subject-confirm}"></span>
                     <br/>
                     <ul>
                         <li>
-                            Môn thi này sẽ bị xóa trong tất cả các môn thi chứa nó
+                            <span th:text="#{lang.delete-subject-notice-1}"></span>
+
                         </li>
                         <li class="text-danger">
-                            Bạn sẽ không thể khôi phục lại dữ liệu đã xóa
+                            <span th:text="#{lang.delete-subject-notice-2}"></span>
+
                         </li>
                     </ul>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Hủy bỏ</button>
-                    <a class="btn btn-danger btn-ok">Xác nhận</a>
+                    <button type="button" class="btn btn-default" data-dismiss="modal"><span th:text="#{lang.cancel}"></span></button>
+                    <a class="btn btn-danger btn-ok"><span th:text="#{lang.done}"></span></a>
                 </div>
             </div>
         </div>
@@ -49,7 +51,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <a th:href="@{/manager/subject/add}" class="btn btn-success">Thêm môn thi</a>
+                    <a th:href="@{/manager/subject/add}" class="btn btn-success"><span th:text="#{lang.add-subject}"></span></a>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
@@ -60,8 +62,8 @@
                         <thead>
                         <tr class="text-center">
                             <th>Id</th>
-                            <th>Tên môn thi</th>
-                            <th>Action</th>
+                            <th><span th:text="#{lang.subject-name}"></span></th>
+                            <th><span th:text="#{lang.action}"></span></th>
                         </tr>
                         </thead>
                         <tbody>

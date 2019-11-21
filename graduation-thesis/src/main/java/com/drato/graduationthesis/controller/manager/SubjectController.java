@@ -23,14 +23,14 @@ public class SubjectController {
 
     @RequestMapping("/subject")
     public String index(Model model) {
-        model.addAttribute("title", "Danh sách môn thi");
+        model.addAttribute("title", "lang.list-subject");
         model.addAttribute("subjects", subjectService.getAll());
         return "manager/subject/index";
     }
 
     @GetMapping("/subject/add")
     public String addSubject(Model model) {
-        model.addAttribute("title", "Thêm môn thi");
+        model.addAttribute("title", "lang.add-subject");
         model.addAttribute("subject", new Subject());
         return "manager/subject/add-subject";
     }
@@ -42,7 +42,7 @@ public class SubjectController {
         }
 
         if (result.hasErrors()){
-            model.addAttribute("title", "Thêm môn thi");
+            model.addAttribute("title", "lang.add-subject");
             return "manager/subject/add-subject";
         }
         subjectService.createSubject(subject);
@@ -58,7 +58,7 @@ public class SubjectController {
             return "redirect:/manager/subject";
         }
         model.addAttribute("subject", subject);
-        model.addAttribute("title", "Sửa môn thi");
+        model.addAttribute("title", "lang.edit-subject");
         return "manager/subject/edit-subject";
     }
 
@@ -69,7 +69,7 @@ public class SubjectController {
         }
 
         if (result.hasErrors()) {
-            model.addAttribute("title", "Sửa môn thi");
+            model.addAttribute("title", "lang.edit-subject");
             model.addAttribute("selectableSubjects", subjectService.getAll());
             return "manager/subject/edit-subject";
         }

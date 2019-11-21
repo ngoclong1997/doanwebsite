@@ -9,6 +9,6 @@ public interface StudentService {
     public List<Student> getAllByExamId(Long examId);
     public Student getById(Long id);
     public void deleteByExamId(Long examId);
-
+    public int countStudentInExam(long examId);
     void insertStudents(List<Student> lstStudents);
 }

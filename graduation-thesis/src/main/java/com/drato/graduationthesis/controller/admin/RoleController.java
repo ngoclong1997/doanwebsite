@@ -15,7 +15,7 @@ public class RoleController {
 
     @RequestMapping("/role")
     public String index(Model model) {
-        model.addAttribute("title", "Danh sách quyền hệ thống");
+        model.addAttribute("title", "lang.role-title");
         return "admin/role/index";
     }
 }

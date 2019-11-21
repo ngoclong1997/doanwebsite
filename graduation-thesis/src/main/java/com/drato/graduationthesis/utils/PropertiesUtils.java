@@ -15,6 +15,7 @@ public class PropertiesUtils {
     static Environment env;
 
     public static final String ROLE_ADMIN = "role.admin";
+    public static final String FILE_UPLOAD_PATH = "file.upload-dir";
 
     private static AnnotationConfigApplicationContext getContext() {
         return new AnnotationConfigApplicationContext(PropertiesUtils.class);

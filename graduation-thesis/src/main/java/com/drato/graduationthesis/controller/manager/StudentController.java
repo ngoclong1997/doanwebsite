@@ -52,7 +52,7 @@ public class StudentController {
         model.addAttribute("students", students);
         model.addAttribute("exams", exams);
         model.addAttribute("studentFilter", studentFilterCriteriaDto);
-        model.addAttribute("title", "Danh sách sinh viên");
+        model.addAttribute("title", "lang.list-student");
         return "manager/student/index";
     }
 
@@ -62,7 +62,7 @@ public class StudentController {
         StudentFileUploadDto studentFileUploadDto = new StudentFileUploadDto();
         studentFileUploadDto.setHasHeader(true);
         model.addAttribute("fileStudent", studentFileUploadDto);
-        model.addAttribute("title", "Nhập sinh viên");
+        model.addAttribute("title", "lang.import-student");
         return "manager/student/add-student";
     }
 
@@ -74,7 +74,7 @@ public class StudentController {
             result.rejectValue("file", null, "Trường này không được bỏ trống");
         }
         if (result.hasErrors()) {
-            model.addAttribute("title", "Nhập sinh viên");
+            model.addAttribute("title", "lang.import-student");
             return "manager/student/add-student";
         }
         try {

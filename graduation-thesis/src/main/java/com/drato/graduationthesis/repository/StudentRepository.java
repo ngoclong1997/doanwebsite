@@ -9,10 +9,11 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Repository
-@Transactional
 public interface StudentRepository extends JpaRepository<Student, Long> {
     public List<Student> findAllByExamId(Long examId);
     public Student findByCode(String code);
     @Transactional
     public void deleteAllByExamId(Long examId);
+    public int countAllByExamId(long examId);
+
 }
